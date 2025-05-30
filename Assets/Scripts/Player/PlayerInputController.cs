@@ -1,8 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
+    public static Action OnPlayerShoot;
+    public static Action<Vector2> OnMovement;
+    public static Action OnStop;
+    
     [SerializeField] PlayerAnimController animController;
     [SerializeField] float moveSpeed = 5f;
     
@@ -32,19 +37,26 @@ public class PlayerInputController : MonoBehaviour
     void StartFire(InputAction.CallbackContext obj)
     {
         StopMoving();
-        
-        
+        OnPlayerShoot?.Invoke();
+        animController.Shoot();
+        Debug.Log($"onShoot");
     }
 
     void OnMove(InputAction.CallbackContext obj)
     {
         _movementDirection = obj.ReadValue<Vector2>().normalized;
-        animController.Walk(_movementDirection);
+        OnMovement?.Invoke(_movementDirection);
     }
 
-    void StopMoving(InputAction.CallbackContext obj = default)
+    void StopMoving(InputAction.CallbackContext obj)
     {
         _movementDirection = Vector2.zero;
-        animController.Idle();
+        OnStop?.Invoke();
+    }
+    
+    void StopMoving()
+    {
+        _movementDirection = Vector2.zero;
+        OnStop?.Invoke();
     }
 }
