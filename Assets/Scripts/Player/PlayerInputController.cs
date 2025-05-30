@@ -1,18 +1,33 @@
 using System;
+using GameEvents;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
-    public static Action OnPlayerShoot;
-    public static Action<Vector2> OnMovement;
-    public static Action OnStop;
+    static PlayerInputController _instance;
     
-    [SerializeField] PlayerAnimController animController;
+    [SerializeField] GameEvent onPlayerStateChanged;
     [SerializeField] float moveSpeed = 5f;
     
-    Vector2 _movementDirection;
+    public static Vector2 MovementDirection;
     DefaultInputActions _inputActions;
+    public static PlayerState CurrentState { get; private set; } = PlayerState.Idle;
+
+    public enum PlayerState
+    {
+        Idle,
+        Walking,
+        Shooting
+    }
+
+    private void Awake()
+    {
+        if (null != _instance)
+            Destroy(_instance);
+        
+        _instance = this;
+    }
 
     void Start()
     {
@@ -21,7 +36,8 @@ public class PlayerInputController : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(_movementDirection * (moveSpeed * Time.deltaTime), Space.World);
+        if(CurrentState == PlayerState.Walking)
+            transform.Translate(MovementDirection * (moveSpeed * Time.deltaTime), Space.World);
     }
     
     void SetupInputActions()
@@ -36,27 +52,27 @@ public class PlayerInputController : MonoBehaviour
 
     void StartFire(InputAction.CallbackContext obj)
     {
-        StopMoving();
-        OnPlayerShoot?.Invoke();
-        animController.Shoot();
-        Debug.Log($"onShoot");
+        ChangePlayerState(PlayerState.Shooting);
     }
 
     void OnMove(InputAction.CallbackContext obj)
     {
-        _movementDirection = obj.ReadValue<Vector2>().normalized;
-        OnMovement?.Invoke(_movementDirection);
+        MovementDirection = obj.ReadValue<Vector2>().normalized;
+        ChangePlayerState(PlayerState.Walking);
     }
 
     void StopMoving(InputAction.CallbackContext obj)
     {
-        _movementDirection = Vector2.zero;
-        OnStop?.Invoke();
+        MovementDirection = Vector2.zero;
+        
+        if(CurrentState == PlayerState.Walking)
+            ChangePlayerState(PlayerState.Idle);
     }
     
-    void StopMoving()
+    public static void ChangePlayerState(PlayerState newState)
     {
-        _movementDirection = Vector2.zero;
-        OnStop?.Invoke();
+        Debug.Log($"PlayerState changed to: {newState}");
+        CurrentState = newState;
+        _instance.onPlayerStateChanged.Raise();
     }
 }

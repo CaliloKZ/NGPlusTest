@@ -13,7 +13,7 @@ namespace Pool
 
         void Awake()
         {
-            if (_instance != null)
+            if (null != _instance)
                 Destroy(_instance);
 
             _instance = this;

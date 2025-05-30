@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class PlayerAnimController : MonoBehaviour
 {
-    const string WALK_TRIGGER = "Walk";
-    const string STOP_TRIGGER = "Stop";
-    const string SHOOT_TRIGGER = "Shoot";
-    const string DIRECTION_PARAM = "Direction";
+    const string WALK_PARAM = "Walking";
+    const string SHOOT_PARAM = "Shooting";
+    const string HORIZONTAL_PARAM = "Horizontal";
+    const string VERTICAL_PARAM = "Vertical";
     
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Transform bodyTransform;
+
+    [SerializeField] List<Animation> shootAnimations;
+    [SerializeField] bool rotateWithScale = true;
     
     Dictionary<AnimatorParameter, int> _parametersHash;
 
@@ -20,56 +24,61 @@ public class PlayerAnimController : MonoBehaviour
         if (null == animator) 
             return;
         
-        PlayerInputController.OnMovement += Walk;
-        PlayerInputController.OnPlayerShoot += Shoot;
-        PlayerInputController.OnStop += Idle;
-        
-        _parametersHash = new Dictionary<AnimatorParameter, int>();
-
-        _parametersHash.Add(AnimatorParameter.Walk, Animator.StringToHash(WALK_TRIGGER));
-        _parametersHash.Add(AnimatorParameter.Stop, Animator.StringToHash(STOP_TRIGGER));
-        _parametersHash.Add(AnimatorParameter.Shoot, Animator.StringToHash(SHOOT_TRIGGER));
-        _parametersHash.Add(AnimatorParameter.Direction, Animator.StringToHash(DIRECTION_PARAM));
+        _parametersHash = new Dictionary<AnimatorParameter, int>
+        {
+            { AnimatorParameter.Walk, Animator.StringToHash(WALK_PARAM) },
+            { AnimatorParameter.Shoot, Animator.StringToHash(SHOOT_PARAM) },
+            { AnimatorParameter.Horizontal, Animator.StringToHash(HORIZONTAL_PARAM) },
+            { AnimatorParameter.Vertical, Animator.StringToHash(VERTICAL_PARAM) }
+        };
     }
-
-    void OnDestroy()
+    
+    public void OnPlayerStateChanged()
     {
-        PlayerInputController.OnMovement -= Walk;
-        PlayerInputController.OnPlayerShoot -= Shoot;
-        PlayerInputController.OnStop -= Idle;
+        var newState = PlayerInputController.CurrentState;
+        
+        Debug.Log($"PlayerAnimController.OnPlayerStateChanged: {newState}");
+        
+        ToggleWalk(newState == PlayerInputController.PlayerState.Walking);
+        ToggleShooting(newState == PlayerInputController.PlayerState.Shooting);
     }
 
-    public void Walk(Vector2 movementDirection)
+    void ToggleWalk(bool isWalking)
     {
         if (null == animator) 
             return;
         
-        animator.SetTrigger(_parametersHash[AnimatorParameter.Walk]);
-        animator.SetInteger(_parametersHash[AnimatorParameter.Direction], Convert.ToInt32(movementDirection.y));
+        animator.SetBool(_parametersHash[AnimatorParameter.Walk], isWalking);
+        if(!isWalking)
+            return;
         
-        float horizontalScale = movementDirection.x < 0? -Math.Abs(transform.localScale.x) : Math.Abs(transform.localScale.x);
+        Vector2 movementDirection = PlayerInputController.MovementDirection;
+        float horizontalMovement = movementDirection.x;
         
-        transform.localScale = new Vector3(
+        animator.SetFloat(_parametersHash[AnimatorParameter.Horizontal], horizontalMovement);
+        animator.SetFloat(_parametersHash[AnimatorParameter.Vertical], movementDirection.y);
+   
+        if(!rotateWithScale || horizontalMovement == 0f)
+            return;
+        
+        float horizontalScale = MathF.Sign(horizontalMovement) * Math.Abs(bodyTransform.localScale.x);
+        
+        bodyTransform.localScale = new Vector3(
             horizontalScale, 
-            transform.localScale.y, 
-            transform.localScale.z);
+            bodyTransform.localScale.y, 
+            bodyTransform.localScale.z);
     }
-
-    public void Idle()
+    
+    void ToggleShooting(bool isShooting)
     {
-       animator.SetTrigger(_parametersHash[AnimatorParameter.Stop]);
-    }
-
-    public void Shoot()
-    {
-        animator.SetTrigger(_parametersHash[AnimatorParameter.Shoot]);
+        animator.SetBool(_parametersHash[AnimatorParameter.Shoot], isShooting);
     }
     
     enum AnimatorParameter
     {
         Walk,
-        Stop,
         Shoot,
-        Direction  
+        Horizontal,
+        Vertical
     }
 }
