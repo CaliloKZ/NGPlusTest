@@ -10,7 +10,6 @@ public class PlayerAnimController : MonoBehaviour
     const string DIRECTION_PARAM = "Direction";
     
     [SerializeField] Animator animator;
-    [SerializeField] Animation idleAnimation;
     [SerializeField] SpriteRenderer spriteRenderer;
     
     Dictionary<AnimatorParameter, int> _parametersHash;
