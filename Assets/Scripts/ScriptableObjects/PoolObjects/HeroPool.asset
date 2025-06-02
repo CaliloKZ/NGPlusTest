@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: HeroPool
   m_EditorClassIdentifier: 
   poolItems:
-  - prefab: {fileID: 5720218109661506929, guid: 4ebc47c4a4fe7c04ea819af6c59a1ac3, type: 3}
-    amount: 5
-  - prefab: {fileID: 5720218109661506929, guid: 362a7f8aed16b3e488e638189f40dab0, type: 3}
-    amount: 5
   - prefab: {fileID: 2285264431768945940, guid: 2937f3897711e7c4f81a48c239c49c52, type: 3}
     amount: 5
