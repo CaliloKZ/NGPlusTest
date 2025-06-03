@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,12 +11,19 @@ namespace UI.Inventory
     
         [SerializeField] TextMeshProUGUI itemNameText;
         [SerializeField] TextMeshProUGUI itemDescriptionText;
-    
-        public void SetItemDescription(Sprite itemIcon, string itemName, string itemDescription)
+
+        void OnEnable()
         {
             ResetItemDescription();
+        }
+
+        public void SetItemDescription(Sprite itemIcon, string itemName, string itemDescription)
+        {
             if (itemIconImage != null)
+            {
                 itemIconImage.sprite = itemIcon;
+                itemIconImage.enabled = true;
+            }
 
             if (itemNameText != null)
                 itemNameText.text = itemName;
@@ -27,6 +35,7 @@ namespace UI.Inventory
         void ResetItemDescription()
         {
             itemIconImage.sprite = null;
+            itemIconImage.enabled = false;
             itemNameText.text = string.Empty;
             itemDescriptionText.text = string.Empty;
         }
