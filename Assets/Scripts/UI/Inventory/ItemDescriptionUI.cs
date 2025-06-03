@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +38,5 @@ namespace UI.Inventory
             itemNameText.text = string.Empty;
             itemDescriptionText.text = string.Empty;
         }
-    
     }
 }

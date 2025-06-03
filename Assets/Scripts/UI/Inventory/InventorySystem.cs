@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SaveSystem;
 using UnityEngine;
 
 namespace UI.Inventory
@@ -18,6 +19,7 @@ namespace UI.Inventory
         [SerializeField] ItemDescriptionUI itemDescriptionUI;
         [SerializeField] Item_SO testItemData;
         [SerializeField] Item_SO testItemData2;
+        [SerializeField] Assetbook_SO itemBook;
     
         Dictionary<int, InventorySlot> slotsInstanceDictionary;
         InventorySlot _selectedSlot;
@@ -45,6 +47,29 @@ namespace UI.Inventory
         {
             OnItemDropAction -= OnItemDrop;
             OnItemSelectAction -= OnItemSelected;
+        }
+
+        public Dictionary<int, int> SaveInventory()
+        {
+            Dictionary<int, int> itemDictionary = new Dictionary<int, int>();
+            for (int i = 0; i < inventorySlots.Count; i++)
+            {
+                if (!inventorySlots[i].TryGetItemData(out Item_SO itemData))
+                    continue;
+                
+                itemDictionary.Add(i, itemData.itemID);
+            }
+
+            return itemDictionary;
+        }
+
+        public void LoadInventory(SaveData saveData)
+        {
+            foreach (var slotItemPair in saveData.InventoryData)
+            {
+                Item_SO itemData = itemBook.assetList[slotItemPair.Value] as Item_SO;
+                inventorySlots[slotItemPair.Key].SetItemData(itemData);
+            }
         }
 
         void Test()
