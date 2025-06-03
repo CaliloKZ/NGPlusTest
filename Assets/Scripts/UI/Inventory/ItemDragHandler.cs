@@ -1,35 +1,36 @@
-using System;
-using UI.Inventory;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemDragHandler : MonoBehaviour
+namespace UI.Inventory
 {
-    [SerializeField] Image itemIconImage;
-
-    void Start()
+    public class ItemDragHandler : MonoBehaviour
     {
-        InventorySystem.OnBeginItemDragAction += OnBeginDrag;
-        InventorySystem.OnEndItemDragAction += OnEndDrag;
-    }
+        [SerializeField] Image itemIconImage;
 
-    private void OnDestroy()
-    {
-        InventorySystem.OnBeginItemDragAction -= OnBeginDrag;
-        InventorySystem.OnEndItemDragAction -= OnEndDrag;
-    }
+        void Start()
+        {
+            InventorySystem.OnBeginItemDragAction += OnBeginDrag;
+            InventorySystem.OnEndItemDragAction += OnEndDrag;
+        }
 
-    void OnBeginDrag(InventorySlot slot)
-    {
-        transform.position = slot.transform.position;
+        private void OnDestroy()
+        {
+            InventorySystem.OnBeginItemDragAction -= OnBeginDrag;
+            InventorySystem.OnEndItemDragAction -= OnEndDrag;
+        }
+
+        void OnBeginDrag(InventorySlot slot)
+        {
+            transform.position = slot.transform.position;
         
-        itemIconImage.sprite = slot.ItemData.itemIcon;
-        itemIconImage.enabled = true;
-    }
+            itemIconImage.sprite = slot.ItemData.itemIcon;
+            itemIconImage.enabled = true;
+        }
 
-    void OnEndDrag()
-    {
-        itemIconImage.enabled = false;
-        itemIconImage.sprite = null;
+        void OnEndDrag()
+        {
+            itemIconImage.enabled = false;
+            itemIconImage.sprite = null;
+        }
     }
 }

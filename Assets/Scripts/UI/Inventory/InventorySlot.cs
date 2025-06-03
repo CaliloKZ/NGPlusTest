@@ -3,11 +3,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI.Inventory
-{ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+{ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
     {
         public Item_SO ItemData { get; private set; }
 
         [SerializeField] Image itemIconImage;
+        [SerializeField] Image itemSelectedBorder;
 
         ItemDragHandler _dragHandler;
         
@@ -68,6 +69,20 @@ namespace UI.Inventory
                 return;
          
             InventorySystem.OnItemDropAction?.Invoke(this, eventData.pointerEnter.GetInstanceID());
+        }
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (null == ItemData)
+                return;
+            
+            InventorySystem.OnItemSelectAction?.Invoke(this);
+        }
+        
+        public void ToggleItemSelectedBorder(bool isSelected)
+        {
+            if (itemSelectedBorder != null)
+                itemSelectedBorder.enabled = isSelected;
         }
     }
 }
