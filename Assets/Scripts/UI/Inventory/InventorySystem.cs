@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Pool;
 using SaveSystem;
 using UnityEngine;
 
@@ -9,46 +10,72 @@ namespace UI.Inventory
     {
         public static ItemDragHandler DragItem { get; private set; }
     
+
         public static Action<InventorySlot> OnBeginItemDragAction;
         public static Action OnEndItemDragAction;
         public static Action<InventorySlot, int> OnItemDropAction;
+        
         public static Action<InventorySlot> OnItemSelectAction;
+        public static Action<ItemCollectable> OnItemPickupAction; 
+   
     
+        [SerializeField] List<InventorySlot> gameplayHotBarSlots = new();
         [SerializeField] List<InventorySlot> inventorySlots = new();
         [SerializeField] ItemDragHandler dragItem;
         [SerializeField] ItemDescriptionUI itemDescriptionUI;
-        [SerializeField] Item_SO testItemData;
-        [SerializeField] Item_SO testItemData2;
         [SerializeField] Assetbook_SO itemBook;
     
-        Dictionary<int, InventorySlot> slotsInstanceDictionary;
+        Dictionary<int, InventorySlot> _slotsInstanceDictionary;
         InventorySlot _selectedSlot;
-
-    
-
+        
         void Awake()
         {
-            slotsInstanceDictionary = new Dictionary<int, InventorySlot>();
+            _slotsInstanceDictionary = new Dictionary<int, InventorySlot>();
             foreach (var slot in inventorySlots)
             {
-                slotsInstanceDictionary.Add(slot.gameObject.GetInstanceID(), slot);
+                _slotsInstanceDictionary.Add(slot.gameObject.GetInstanceID(), slot);
             }
             DragItem = dragItem;
-            Test();
         }
 
         void Start()
         {
             OnItemDropAction += OnItemDrop;
             OnItemSelectAction += OnItemSelected;
+            OnItemPickupAction += OnItemPickup;
         }
 
         void OnDestroy()
         {
             OnItemDropAction -= OnItemDrop;
             OnItemSelectAction -= OnItemSelected;
+            OnItemPickupAction -= OnItemPickup;
         }
 
+        void OnItemPickup(ItemCollectable item)
+        {
+            for (var i = 0; i < inventorySlots.Count; i++)
+            {
+                InventorySlot slot = inventorySlots[i];
+                if (slot.TryGetItemData(out _))
+                    continue;
+
+                SetItemData(slot, item.itemData);
+                FastPool.Destroy(item.gameObject);
+                return;
+            }
+        }
+
+        void SetItemData(InventorySlot slot, Item_SO itemData)
+        {
+            slot.SetItemData(itemData);
+            if (slot.IsHotBarSlot)
+            {
+                InventorySlot hotBarSlot = gameplayHotBarSlots[inventorySlots.IndexOf(slot)];
+                hotBarSlot.SetItemData(itemData);
+            }
+        }
+        
         public Dictionary<int, int> SaveInventory()
         {
             Dictionary<int, int> itemDictionary = new Dictionary<int, int>();
@@ -68,31 +95,25 @@ namespace UI.Inventory
             foreach (var slotItemPair in saveData.InventoryData)
             {
                 Item_SO itemData = itemBook.assetList[slotItemPair.Value] as Item_SO;
-                inventorySlots[slotItemPair.Key].SetItemData(itemData);
+                SetItemData(inventorySlots[slotItemPair.Key], itemData);
             }
-        }
-
-        void Test()
-        {
-            inventorySlots[0].SetItemData(testItemData);
-            inventorySlots[3].SetItemData(testItemData2);
         }
 
         void OnItemDrop(InventorySlot oldSlot, int newSlotID)
         {
-            if (!slotsInstanceDictionary.TryGetValue(newSlotID, out var newSlot)) 
+            if (!_slotsInstanceDictionary.TryGetValue(newSlotID, out var newSlot)) 
                 return;
 
             Item_SO oldSlotItemData = oldSlot.ItemData;
 
             bool newSlotHasItemData = newSlot.TryGetItemData(out Item_SO itemData);
         
-            newSlot.SetItemData(oldSlotItemData);
+            SetItemData(newSlot, oldSlotItemData);
             OnItemSelected(newSlot);
 
             if (newSlotHasItemData)
             {
-                oldSlot.SetItemData(itemData);
+                SetItemData(oldSlot, itemData);
                 return;
             }
         

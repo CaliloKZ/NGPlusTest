@@ -71,7 +71,6 @@ public class PlayerInputController : MonoBehaviour
     
     public static void ChangePlayerState(PlayerState newState)
     {
-        Debug.Log($"PlayerState changed to: {newState}");
         CurrentState = newState;
         _instance.onPlayerStateChanged.Raise();
     }

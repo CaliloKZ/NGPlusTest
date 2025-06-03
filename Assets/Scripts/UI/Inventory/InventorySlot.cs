@@ -5,6 +5,7 @@ using UnityEngine.UI;
 namespace UI.Inventory
 { public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
     {
+        [field: SerializeField] public bool IsHotBarSlot { get; private set; }
         public Item_SO ItemData { get; private set; }
 
         [SerializeField] Image itemIconImage;

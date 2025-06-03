@@ -15,3 +15,5 @@ MonoBehaviour:
   poolItems:
   - prefab: {fileID: 2285264431768945940, guid: 2937f3897711e7c4f81a48c239c49c52, type: 3}
     amount: 5
+  - prefab: {fileID: 7175098536672208628, guid: d07080f265194734a9f8a809525ae6b3, type: 3}
+    amount: 5
