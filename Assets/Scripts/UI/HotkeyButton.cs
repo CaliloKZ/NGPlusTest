@@ -18,8 +18,8 @@ namespace UI
         
         Coroutine _resetRoutine;
         WaitForSeconds _waitTimeFadeDuration;
-        
-        private void Reset()
+
+        protected override void Reset()
         {
             targetGraphic = imageComponent;
         }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 358c8b7f50787d44ba7d98158e050e9c, type: 3}
+  m_Name: 7_IceScroll
+  m_EditorClassIdentifier: 
+  itemID: 3
+  itemIcon: {fileID: -2074277260569937000, guid: 83ecbb6b0a9427549bb1ff501cd06537, type: 3}
+  itemName: Ice Scroll
+  itemDescription: A scroll imbued with ice magic! One of the rarest things in the
+    world... if only I knew how to use it

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
-using UI.Inventory;
+using Inventory;
 using UnityEngine;
 
 namespace SaveSystem
