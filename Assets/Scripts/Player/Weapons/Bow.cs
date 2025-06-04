@@ -1,4 +1,3 @@
-using System;
 using Pool;
 using UnityEngine;
 using PlayerState = PlayerInputController.PlayerState;
