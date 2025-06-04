@@ -7,6 +7,7 @@ public class PlayerAnimController : MonoBehaviour
 {
     const string WALK_PARAM = "Walking";
     const string SHOOT_PARAM = "Shooting";
+    const string ATTACK_PARAM = "Attack";
     const string HORIZONTAL_PARAM = "Horizontal";
     const string VERTICAL_PARAM = "Vertical";
     
@@ -28,6 +29,7 @@ public class PlayerAnimController : MonoBehaviour
         {
             { AnimatorParameter.Walk, Animator.StringToHash(WALK_PARAM) },
             { AnimatorParameter.Shoot, Animator.StringToHash(SHOOT_PARAM) },
+            { AnimatorParameter.Attack, Animator.StringToHash(ATTACK_PARAM) },
             { AnimatorParameter.Horizontal, Animator.StringToHash(HORIZONTAL_PARAM) },
             { AnimatorParameter.Vertical, Animator.StringToHash(VERTICAL_PARAM) }
         };
@@ -36,8 +38,6 @@ public class PlayerAnimController : MonoBehaviour
     public void OnPlayerStateChanged()
     {
         var newState = PlayerInputController.CurrentState;
-        
-        Debug.Log($"PlayerAnimController.OnPlayerStateChanged: {newState}");
         
         ToggleWalk(newState == PlayerInputController.PlayerState.Walking);
         ToggleShooting(newState == PlayerInputController.PlayerState.Shooting);
@@ -69,6 +69,11 @@ public class PlayerAnimController : MonoBehaviour
             bodyTransform.localScale.z);
     }
     
+    void Attack()
+    {
+        animator.SetTrigger(_parametersHash[AnimatorParameter.Shoot]);
+    }
+    
     void ToggleShooting(bool isShooting)
     {
         animator.SetBool(_parametersHash[AnimatorParameter.Shoot], isShooting);
@@ -78,6 +83,7 @@ public class PlayerAnimController : MonoBehaviour
     {
         Walk,
         Shoot,
+        Attack,
         Horizontal,
         Vertical
     }

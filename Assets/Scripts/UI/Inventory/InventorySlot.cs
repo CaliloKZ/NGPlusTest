@@ -4,15 +4,23 @@ using UnityEngine.UI;
 
 namespace UI.Inventory
 { public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
-    {
-        [field: SerializeField] public bool IsHotBarSlot { get; private set; }
+    { 
         public Item_SO ItemData { get; private set; }
 
         [SerializeField] Image itemIconImage;
         [SerializeField] Image itemSelectedBorder;
+        [SerializeField] HotBarSlot hotBarSlot;
 
         ItemDragHandler _dragHandler;
-        
+
+        void Start()
+        {
+            if(null == hotBarSlot)
+                return;
+            
+            hotBarSlot.SetSlot(this);
+        }
+
         public bool TryGetItemData(out Item_SO itemData)
         {
             itemData = ItemData;
@@ -37,11 +45,17 @@ namespace UI.Inventory
 
         void UpdateItemIcon()
         {
-            if (itemIconImage != null && ItemData != null)
-            {
-                itemIconImage.sprite = ItemData.itemIcon;
-                itemIconImage.enabled = true;
-            }
+            if (null == itemIconImage || null == ItemData)
+                return;
+            
+            itemIconImage.sprite = ItemData.itemIcon;
+            itemIconImage.enabled = true;
+            
+            
+            if (null == hotBarSlot)
+                return;
+
+            hotBarSlot.UpdateItemIcon(ItemData.itemIcon);
         }
 
         public void OnBeginDrag(PointerEventData eventData)

@@ -9,7 +9,6 @@ namespace UI.Inventory
     public class InventorySystem : MonoBehaviour
     {
         public static ItemDragHandler DragItem { get; private set; }
-    
 
         public static Action<InventorySlot> OnBeginItemDragAction;
         public static Action OnEndItemDragAction;
@@ -18,8 +17,7 @@ namespace UI.Inventory
         public static Action<InventorySlot> OnItemSelectAction;
         public static Action<ItemCollectable> OnItemPickupAction; 
    
-    
-        [SerializeField] List<InventorySlot> gameplayHotBarSlots = new();
+        
         [SerializeField] List<InventorySlot> inventorySlots = new();
         [SerializeField] ItemDragHandler dragItem;
         [SerializeField] ItemDescriptionUI itemDescriptionUI;
@@ -69,11 +67,6 @@ namespace UI.Inventory
         void SetItemData(InventorySlot slot, Item_SO itemData)
         {
             slot.SetItemData(itemData);
-            if (slot.IsHotBarSlot)
-            {
-                InventorySlot hotBarSlot = gameplayHotBarSlots[inventorySlots.IndexOf(slot)];
-                hotBarSlot.SetItemData(itemData);
-            }
         }
         
         public Dictionary<int, int> SaveInventory()
@@ -130,6 +123,11 @@ namespace UI.Inventory
         
             Item_SO itemData = slot.ItemData;
             itemDescriptionUI.SetItemDescription(itemData.itemIcon, itemData.itemName, itemData.itemDescription);
+        }
+        
+        public void EquipItem(InventorySlot slot)
+        {
+            
         }
     }
 }

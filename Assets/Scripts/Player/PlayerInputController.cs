@@ -18,7 +18,9 @@ public class PlayerInputController : MonoBehaviour
     {
         Idle,
         Walking,
-        Shooting
+        Attack,
+        Shooting,
+        Dialogue,
     }
 
     private void Awake()
@@ -47,9 +49,14 @@ public class PlayerInputController : MonoBehaviour
         _inputActions.Player.Move.performed += OnMove;
         _inputActions.Player.Move.canceled += StopMoving;
 
-        _inputActions.Player.Fire.performed += StartFire;
+        _inputActions.Player.Fire.performed += StartAttack;
     }
 
+    void StartAttack(InputAction.CallbackContext obj)
+    {
+        ChangePlayerState(PlayerState.Attack);
+    }
+    
     void StartFire(InputAction.CallbackContext obj)
     {
         ChangePlayerState(PlayerState.Shooting);

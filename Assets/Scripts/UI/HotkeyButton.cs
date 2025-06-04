@@ -6,18 +6,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace UI.Inventory
+namespace UI
 {
     public class HotkeyButton : Selectable, IPointerClickHandler, ISubmitHandler
     {
-        [Header("Input Conditionals")] 
         [SerializeField] InputActionReference assignedHotkeyButton;
-
-        [Header("Visuals Setup")] 
         [SerializeField] TMP_Text hotkeyLabel;
         [SerializeField] Image imageComponent;
         
-        [Header("Click Events")] 
         public UnityEvent OnClick;
         
         Coroutine _resetRoutine;

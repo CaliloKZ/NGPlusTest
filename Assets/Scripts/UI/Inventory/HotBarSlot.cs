@@ -15,6 +15,12 @@ namespace UI.Inventory
             _slot = slot;
         }
 
+        public void UpdateItemIcon(Sprite itemIcon)
+        {
+            itemIconImage.sprite = itemIcon;
+            itemIconImage.enabled = true;
+        }
+
         public void EquipItem()
         {
             
