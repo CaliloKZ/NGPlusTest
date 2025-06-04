@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c8b7f50787d44ba7d98158e050e9c, type: 3}
   m_Name: 9_GoldBar
   m_EditorClassIdentifier: 
-  itemID: 3
+  itemID: 9
   itemIcon: {fileID: 3940290342797489432, guid: d9c2057396ed3274594d33b0605e1dba, type: 3}
   itemName: Gold Bar
   itemDescription: A gold bar for crafting... Too bad they fired the blacksmith

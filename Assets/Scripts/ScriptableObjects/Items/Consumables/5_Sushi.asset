@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c8b7f50787d44ba7d98158e050e9c, type: 3}
   m_Name: 5_Sushi
   m_EditorClassIdentifier: 
-  itemID: 2
+  itemID: 5
   itemIcon: {fileID: -1532564777219809439, guid: 2d6771c1ee512e34fb0320d73f6f9486, type: 3}
   itemName: Sushi
   itemDescription: Great, more raw fish...

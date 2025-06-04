@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c8b7f50787d44ba7d98158e050e9c, type: 3}
   m_Name: 4_Shrimp
   m_EditorClassIdentifier: 
-  itemID: 2
+  itemID: 4
   itemIcon: {fileID: 868504884959497903, guid: 315b83ba93f83524787e24ae2aa9791d, type: 3}
   itemName: Shrimp
   itemDescription: Hope i'm not allergic

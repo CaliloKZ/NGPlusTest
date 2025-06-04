@@ -11,16 +11,13 @@ namespace Player
     {
         [SerializeField] InputActionReference fireActionReference;
         [SerializeField] List<EquipItems> equipItemsList = new();
-        Dictionary<int, EquipItems> _equippedItemsDictionary;
         
         EquipItems _currentEquippedItem;
 
         void Awake()
         {
-            _equippedItemsDictionary = new Dictionary<int, EquipItems>();
             foreach (var item in equipItemsList)
             {
-                _equippedItemsDictionary.Add(item.ItemData.itemID, item);
                 item.SetFireActionReference(fireActionReference);
             }
         }
@@ -40,7 +37,7 @@ namespace Player
             if (null != _currentEquippedItem)
                 _currentEquippedItem.OnItemUnequipped();
             
-            _currentEquippedItem = _equippedItemsDictionary[itemData.itemID];
+            _currentEquippedItem = equipItemsList[itemData.itemID];
             _currentEquippedItem.OnItemEquipped(itemData);
         }
     }

@@ -10,13 +10,13 @@ namespace Items.Consumable
         [SerializeField] SpriteRenderer itemRenderer;
         protected override void OnFireAction(InputAction.CallbackContext obj)
         {
-            PlayerInputController.ChangePlayerState(PlayerInputController.PlayerState.UsingItem);
+            PlayerInputController.ChangePlayerState(PlayerState.UsingItem);
         }
         
         public override void OnPlayerStateChanged()
         {
-            PlayerInputController.PlayerState newState = PlayerInputController.CurrentState;
-            bool isUsingItem = newState == PlayerInputController.PlayerState.UsingItem;
+            PlayerState newState = PlayerInputController.CurrentState;
+            bool isUsingItem = newState == PlayerState.UsingItem;
             ToggleFireAction(isUsingItem);
             
             if(isUsingItem)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c8b7f50787d44ba7d98158e050e9c, type: 3}
   m_Name: 7_IceScroll
   m_EditorClassIdentifier: 
-  itemID: 3
+  itemID: 7
   itemIcon: {fileID: -2074277260569937000, guid: 83ecbb6b0a9427549bb1ff501cd06537, type: 3}
   itemName: Ice Scroll
   itemDescription: A scroll imbued with ice magic! One of the rarest things in the

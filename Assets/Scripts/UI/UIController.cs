@@ -6,10 +6,15 @@ namespace UI
     {
         [SerializeField] GameObject inventoryUI;
         [SerializeField] GameObject gameplayUI;
-    
+        
         public void ToggleInventoryUI(bool isActive)
         {
             inventoryUI.SetActive(isActive);
+            gameplayUI.SetActive(!isActive);
+        }
+
+        public void OnDialogUIToggle(bool isActive)
+        {
             gameplayUI.SetActive(!isActive);
         }
     }

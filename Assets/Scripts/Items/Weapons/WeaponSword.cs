@@ -2,7 +2,6 @@ using Player;
 using Pool;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using PlayerState = Player.PlayerInputController.PlayerState;
 
 namespace Items.Weapons
 {

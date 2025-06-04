@@ -40,10 +40,10 @@ namespace Player
         {
             var newState = PlayerInputController.CurrentState;
         
-            ToggleWalk(newState == PlayerInputController.PlayerState.Walking);
-            ToggleShooting(newState == PlayerInputController.PlayerState.Shooting);
+            ToggleWalk(newState == PlayerState.Walking);
+            ToggleShooting(newState == PlayerState.Shooting);
         
-            if (newState == PlayerInputController.PlayerState.Attack)
+            if (newState == PlayerState.Attack)
                 Attack();
         }
 
