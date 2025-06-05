@@ -9,12 +9,9 @@ namespace Items.Weapons
         [SerializeField] float speed = 10f;
         [SerializeField] string hitParticleEffectID;
 
-        void Start()
+        void FixedUpdate()
         {
-            if(null == arrowRigidbody)
-                return;
-        
-            arrowRigidbody.linearVelocity = transform.up * speed;
+            arrowRigidbody.linearVelocity = transform.right * speed;
         }
 
         private void OnCollisionEnter2D(Collision2D other)

@@ -8,6 +8,7 @@ namespace Items.Consumable
     public class ConsumableFood : EquipItems
     {
         [SerializeField] SpriteRenderer itemRenderer;
+        
         protected override void OnFireAction(InputAction.CallbackContext obj)
         {
             PlayerInputController.ChangePlayerState(PlayerState.UsingItem);
@@ -16,22 +17,17 @@ namespace Items.Consumable
         public override void OnPlayerStateChanged()
         {
             PlayerState newState = PlayerInputController.CurrentState;
-            bool isUsingItem = newState == PlayerState.UsingItem;
-            ToggleFireAction(isUsingItem);
             
-            if(isUsingItem)
-                UseItem();
+            if(newState == PlayerState.UsingItem)
+                InventorySystem.OnItemUseAction?.Invoke();
         }
 
         public override void OnItemEquipped(Item_SO itemData)
         {
             base.OnItemEquipped(itemData);
+            ItemData = itemData;
             itemRenderer.sprite = itemData.itemIcon;
-        }
-
-        void UseItem()
-        {
-            OnItemUnequipped();
+            Debug.Log($"Consumable Equipped: {itemData.itemName}, {itemData.itemIcon.name}, {itemRenderer.sprite}");
         }
     }
 }

@@ -1,15 +1,18 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PoolObjects", menuName = "Scriptable Objects/PoolObjects")]
-public class PoolObjects : ScriptableObject
+namespace Pool
 {
-    public PoolItem[] poolItems;
-    
-    [Serializable]
-    public struct PoolItem
+    [CreateAssetMenu(fileName = "TypedPoolObjects", menuName = "Scriptable Objects/TypedPoolObjects")]
+    public class TypedPoolObjects : ScriptableObject
     {
-        public GameObject prefab;
-        public int amount;
+        public TypedPoolItem[] poolItems;
+    
+        [Serializable]
+        public struct TypedPoolItem
+        {
+            public MonoBehaviour prefab;
+            public int amount;
+        }
     }
 }

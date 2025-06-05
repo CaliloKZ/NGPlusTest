@@ -62,6 +62,10 @@ namespace UI
             nextLineActionReference.action.Enable();
             uiController.OnDialogUIToggle(true);
             dialoguePanel.SetActive(true);
+            
+            if(_typeLineCoroutine != null)
+                StopCoroutine(_typeLineCoroutine);
+            
             _typeLineCoroutine = StartCoroutine(TypeLine());
         }
 
@@ -84,6 +88,9 @@ namespace UI
                 return;
             }
 
+            if(_typeLineCoroutine != null)
+                StopCoroutine(_typeLineCoroutine);
+            
             _typeLineCoroutine = StartCoroutine(TypeLine());
         }
 

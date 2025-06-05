@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c8b7f50787d44ba7d98158e050e9c, type: 3}
   m_Name: 2_Fish
   m_EditorClassIdentifier: 
+  itemType: 0
   itemID: 2
+  prefabID: Item_Fish
   itemIcon: {fileID: -1915776564401465818, guid: a7f10191a01fe6f45b6e564ad07bd8c4, type: 3}
   itemName: Raw Fish
   itemDescription: A fish. Raw. It has no effects... So why should I eat it raw??
+  isStackable: 1
+  maxStackSize: 16

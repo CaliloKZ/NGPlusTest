@@ -29,7 +29,6 @@ namespace Player
 
         void OnInteractAction(InputAction.CallbackContext obj)
         {
-            Debug.Log($"OnInteractAction: {_canInteract}, OtherID: {_otherID}");
             if (!_canInteract || _otherID == -1)
                 return;
 

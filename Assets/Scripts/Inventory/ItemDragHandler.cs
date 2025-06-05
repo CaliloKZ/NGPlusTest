@@ -23,7 +23,7 @@ namespace Inventory
         {
             transform.position = slot.transform.position;
         
-            itemIconImage.sprite = slot.ItemData.itemIcon;
+            itemIconImage.sprite = slot.SlotData.itemData.itemIcon;
             itemIconImage.enabled = true;
         }
 

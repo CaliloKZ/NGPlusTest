@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GameEvents;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,71 +8,78 @@ namespace Player
 {
     public class PlayerInputController : MonoBehaviour
     {
+        public static PlayerState CurrentState { get; private set; } = PlayerState.Idle;
+        public static DefaultInputActions InputActions { get; private set; }
+        public static Transform PlayerTransform { get; private set; }
+        public static Vector2 MovementDirection { get; private set; }
+        
         static PlayerInputController _instance;
-    
-        [SerializeField] Rigidbody2D playerRigidbody;
+
+
+        [SerializeField] List<InputActionReference> playersInputActions;
+        
         [SerializeField] GameEvent onPlayerStateChanged;
         [SerializeField] float moveSpeed = 5f;
-    
-        public static Vector2 MovementDirection;
-        DefaultInputActions _inputActions;
-        public static PlayerState CurrentState { get; private set; } = PlayerState.Idle;
+        
 
-        private void Awake()
+        void Awake()
         {
             if (null != _instance)
                 Destroy(_instance);
         
             _instance = this;
-        }
-
-        void Start()
-        {
+            PlayerTransform = _instance.transform;
             SetupInputActions();
         }
-
+        
         void FixedUpdate()
         {
-            //if(CurrentState == PlayerState.Walking)
-                
+            if(CurrentState == PlayerState.Walking)
+                transform.Translate(MovementDirection * (moveSpeed * Time.fixedDeltaTime), Space.World);
         }
 
         void OnDestroy()
         {
-            _inputActions.Player.Move.performed -= OnMove;
-            _inputActions.Player.Move.canceled -= StopMoving;
+            InputActions.Player.Move.performed -= OnMove;
+            InputActions.Player.Move.canceled -= StopMoving;
         }
 
         void SetupInputActions()
         {
-            _inputActions = new DefaultInputActions();
+            InputActions = new DefaultInputActions();
             ToggleInputActions(true);
-            _inputActions.Player.Move.performed += OnMove;
-            _inputActions.Player.Move.canceled += StopMoving;
+            InputActions.Player.Move.performed += OnMove;
+            InputActions.Player.Move.canceled += StopMoving;
         }
 
-        void ToggleInputActions(bool enable)
+        public static void ToggleInputActions(bool enable)
         {
             if (enable)
             {
-                _inputActions.Player.Enable();
+                InputActions.Player.Enable();
+                for (int i = 0; i < _instance.playersInputActions.Count; i++)
+                {
+                    _instance.playersInputActions[i].action.Enable();
+                }
                 return;
             }
             
-            _inputActions.Player.Disable();
+            InputActions.Player.Disable();
+            for (int i = 0; i < _instance.playersInputActions.Count; i++)
+            {
+                _instance.playersInputActions[i].action.Disable();
+            }
         }
 
         void OnMove(InputAction.CallbackContext obj)
         {
             MovementDirection = obj.ReadValue<Vector2>().normalized;
-            playerRigidbody.linearVelocity = MovementDirection * (moveSpeed * Time.fixedDeltaTime);
             ChangePlayerState(PlayerState.Walking);
         }
 
         void StopMoving(InputAction.CallbackContext obj)
         {
             MovementDirection = Vector2.zero;
-            playerRigidbody.linearVelocity = Vector2.zero;
         
             if(CurrentState == PlayerState.Walking)
                 ChangePlayerState(PlayerState.Idle);
@@ -87,10 +95,6 @@ namespace Player
         void OnChangePlayerState()
         {
             onPlayerStateChanged.Raise();
-            bool canInput = (CurrentState != PlayerState.Dialogue 
-                             && CurrentState != PlayerState.UsingItem);
-            
-            ToggleInputActions(canInput);
         }
     }
     
@@ -101,6 +105,6 @@ namespace Player
         Attack,
         Shooting,
         UsingItem,
-        Dialogue,
+        Dialogue
     }
 }

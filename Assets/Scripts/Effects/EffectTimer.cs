@@ -2,7 +2,7 @@ using System.Collections;
 using Pool;
 using UnityEngine;
 
-namespace VFX
+namespace Effects
 {
    public class EffectTimer : MonoBehaviour
    {

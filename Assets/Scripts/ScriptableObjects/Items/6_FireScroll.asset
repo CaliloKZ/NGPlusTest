@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c8b7f50787d44ba7d98158e050e9c, type: 3}
   m_Name: 6_FireScroll
   m_EditorClassIdentifier: 
+  itemType: 0
   itemID: 6
+  prefabID: Item_FireScroll
   itemIcon: {fileID: -4026627026602525782, guid: 3c73e87179acbda4380b9c73c710328d, type: 3}
   itemName: Fire Scroll
   itemDescription: A scroll imbued with fire magic! One of the rarest things in the
     world... if only I knew how to use it
+  isStackable: 1
+  maxStackSize: 32

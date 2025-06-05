@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c8b7f50787d44ba7d98158e050e9c, type: 3}
   m_Name: 1_Bow
   m_EditorClassIdentifier: 
+  itemType: 0
   itemID: 1
+  prefabID: Item_Bow
   itemIcon: {fileID: -6251451809504726511, guid: 96c0c88853e9f6240b4085d30e540fbe, type: 3}
   itemName: Bow
   itemDescription: The legendary bow of infinite arrows
+  isStackable: 0
+  maxStackSize: 1

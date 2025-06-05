@@ -7,6 +7,12 @@ namespace Items
     {
         const string PlayerTag = "Player";
         public Item_SO itemData;
+        public int amount = 1;
+
+        public void SetItemAmount(int newAmount)
+        {
+            amount = newAmount;
+        }
 
         void OnTriggerEnter2D(Collider2D other)
         {

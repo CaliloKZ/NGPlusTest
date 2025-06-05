@@ -1,3 +1,5 @@
+using System;
+using Pool;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -5,61 +7,44 @@ using UnityEngine.UI;
 namespace Inventory
 { public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
     { 
-        public Item_SO ItemData { get; private set; }
+        [field: SerializeField] public InventorySlot_SO SlotData { get; private set; }
 
+        [SerializeField] ItemAmountTextUI itemAmountTextUI;
+        
         [SerializeField] Image itemIconImage;
         [SerializeField] Image itemSelectedBorder;
-        [SerializeField] HotBarSlot hotBarSlot;
 
         ItemDragHandler _dragHandler;
 
-        public bool TryGetItemData(out Item_SO itemData)
+        void OnEnable()
         {
-            itemData = ItemData;
-            return itemData != null;
+            UpdateSlot();
         }
 
-        public void SetItemData(Item_SO newItemData)
+        public void SetItemData(Item_SO newItemData, int itemAmount)
         {
-            ItemData = newItemData;
-            UpdateItemIcon();
-            if(null == hotBarSlot)
-                return;
-            
-            hotBarSlot.SetItemData(ItemData);
+            SlotData.SetItem(newItemData, itemAmount);
+            UpdateSlot();
         }
 
-        public void ResetSlot()
+        public void ClearSlot()
         {
-            ItemData = null;
-            if (null != hotBarSlot)
-                hotBarSlot.ResetSlot();
-                
-            if (itemIconImage == null)
-                return;
-        
-            itemIconImage.sprite = null;
-            itemIconImage.enabled = false;
+            SlotData.ClearSlot();
+            UpdateSlot();
         }
 
-        void UpdateItemIcon()
+        void UpdateSlot()
         {
-            if (null == itemIconImage || null == ItemData)
-                return;
+            bool hasItem = SlotData.TryGetItemData(out var itemData);
             
-            itemIconImage.sprite = ItemData.itemIcon;
-            itemIconImage.enabled = true;
-            
-            
-            if (null == hotBarSlot)
-                return;
-
-            hotBarSlot.UpdateItemIcon(ItemData.itemIcon);
+            itemAmountTextUI.SetItemAmount(SlotData.stackSize, hasItem && itemData.maxStackSize == SlotData.stackSize);
+            itemIconImage.sprite = hasItem ? itemData.itemIcon : null;
+            itemIconImage.enabled = hasItem;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if(null == ItemData)
+            if(!SlotData.TryGetItemData(out _))
                 return;
         
             if(null == _dragHandler)
@@ -79,15 +64,15 @@ namespace Inventory
         public void OnEndDrag(PointerEventData eventData)
         {
             InventorySystem.OnEndItemDragAction?.Invoke();
-            if (null == eventData.pointerEnter) 
+            if (null == eventData.pointerEnter)
                 return;
-         
+            
             InventorySystem.OnItemDropAction?.Invoke(this, eventData.pointerEnter.GetInstanceID());
         }
         
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (null == ItemData)
+            if(!SlotData.TryGetItemData(out _))
                 return;
             
             InventorySystem.OnItemSelectAction?.Invoke(this);
@@ -97,6 +82,19 @@ namespace Inventory
         {
             if (itemSelectedBorder != null)
                 itemSelectedBorder.enabled = isSelected;
+        }
+
+        public void OnItemUsed()
+        {
+            SlotData.ChangeItemAmount(-1);
+
+            if (SlotData.stackSize <= 0)
+            {
+                ClearSlot();
+                InventorySystem.OnItemUnequipAction?.Invoke();
+            }
+            
+            InventorySystem.OnSlotUpdateAction?.Invoke(SlotData);
         }
     }
 }

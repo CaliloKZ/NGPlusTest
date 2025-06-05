@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c8b7f50787d44ba7d98158e050e9c, type: 3}
   m_Name: 10_IronBar
   m_EditorClassIdentifier: 
+  itemType: 0
   itemID: 10
+  prefabID: Item_IronBar
   itemIcon: {fileID: 1844113576766869519, guid: 171d52420b488b04ea8e12ce958530d6, type: 3}
   itemName: Iron bar
   itemDescription: A iron bar for crafting... Too bad they fired the blacksmith
+  isStackable: 1
+  maxStackSize: 32

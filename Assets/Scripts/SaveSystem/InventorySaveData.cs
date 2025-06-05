@@ -1,8 +1,12 @@
+using System;
+
 namespace SaveSystem
 {
-    public class InventoryaveData
+    [Serializable]
+    public class InventorySaveData
     {
         public int ItemID;
         public int SlotID;
+        public int StackSize;
     }
 }

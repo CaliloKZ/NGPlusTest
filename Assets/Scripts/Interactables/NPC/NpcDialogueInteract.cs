@@ -21,7 +21,6 @@ namespace Interactables.NPC
 
         void OnPlayerInteract(int gameObjectID)
         {
-            Debug.Log($"OnPlayerInteract: {gameObjectID}, GameObjectID: {gameObject.GetInstanceID()}");
             if(gameObject.GetInstanceID() != gameObjectID)
                 return;
             

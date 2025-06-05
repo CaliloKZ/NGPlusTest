@@ -6,6 +6,6 @@ namespace SaveSystem
     [Serializable]
     public class SaveData
     {
-        public Dictionary<int, int> InventoryData;
+        public List<InventorySaveData> inventorySaveData;
     }
 }

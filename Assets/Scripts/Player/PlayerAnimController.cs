@@ -15,9 +15,7 @@ namespace Player
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer spriteRenderer;
         [SerializeField] Transform bodyTransform;
-
-        [SerializeField] List<Animation> shootAnimations;
-        [SerializeField] bool rotateWithScale = true;
+        [SerializeField] Transform meleeAttackRangeCenter;
     
         Dictionary<AnimatorParameter, int> _parametersHash;
 
@@ -57,24 +55,18 @@ namespace Player
                 return;
         
             Vector2 movementDirection = PlayerInputController.MovementDirection;
-            float horizontalMovement = movementDirection.x;
         
-            animator.SetFloat(_parametersHash[AnimatorParameter.Horizontal], horizontalMovement);
+            animator.SetFloat(_parametersHash[AnimatorParameter.Horizontal], movementDirection.x);
             animator.SetFloat(_parametersHash[AnimatorParameter.Vertical], movementDirection.y);
-   
-            if(!rotateWithScale || horizontalMovement == 0f)
-                return;
-        
-            float horizontalScale = MathF.Sign(horizontalMovement) * Math.Abs(bodyTransform.localScale.x);
-        
-            bodyTransform.localScale = new Vector3(
-                horizontalScale, 
-                bodyTransform.localScale.y, 
-                bodyTransform.localScale.z);
         }
     
         void Attack()
         {
+            // meleeAttackRangeCenter.position += new Vector3(
+            //     animator.GetFloat(_parametersHash[AnimatorParameter.Horizontal]),
+            //     animator.GetFloat(_parametersHash[AnimatorParameter.Vertical]),
+            //      0);
+            //
             animator.SetTrigger(_parametersHash[AnimatorParameter.Attack]);
         }
     

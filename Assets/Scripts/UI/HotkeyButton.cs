@@ -19,7 +19,7 @@ namespace UI
         Coroutine _resetRoutine;
         WaitForSeconds _waitTimeFadeDuration;
 
-        protected override void Reset()
+        protected new void Reset()
         {
             targetGraphic = imageComponent;
         }
@@ -29,15 +29,19 @@ namespace UI
             base.Start();
             
             _waitTimeFadeDuration = new WaitForSeconds(colors.fadeDuration);
-            assignedHotkeyButton.action.performed += HotkeyClicked;
-            
             if(null != hotkeyLabel)
                 hotkeyLabel.SetText(GetAssignedButton());
         }
-        
-        protected override void OnDestroy()
+
+        protected override void OnEnable()
         {
-            base.OnDestroy();
+            base.OnEnable();
+            assignedHotkeyButton.action.performed += HotkeyClicked;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
             assignedHotkeyButton.action.performed -= HotkeyClicked;
         }
         

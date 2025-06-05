@@ -1,4 +1,5 @@
 using Inventory;
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,44 +7,29 @@ namespace Items
 {
     public abstract class EquipItems : MonoBehaviour
     {
-        [field: SerializeField] public Item_SO ItemData { get; private set; }
-        InputActionReference _fireActionReference;
-        
-        public void SetFireActionReference(InputActionReference actionReference)
-        {
-            _fireActionReference = actionReference;
-        }
+        [field: SerializeField] public Item_SO ItemData { get; protected set; }
+        DefaultInputActions _playerInputActions;
 
         protected virtual void OnEnable()
         {
-            if (_fireActionReference == null) 
+            _playerInputActions = PlayerInputController.InputActions;
+            if (_playerInputActions == null) 
                 return;
             
-            _fireActionReference.action.performed += OnFireAction;
+            _playerInputActions.Player.Fire.started += OnFireAction;
         }
 
         protected virtual void OnDisable()
         {
-            if (_fireActionReference == null) 
+            if (_playerInputActions == null) 
                 return;
             
-            _fireActionReference.action.performed -= OnFireAction;
+            _playerInputActions.Player.Fire.started -= OnFireAction;
         }
 
         protected virtual void OnFireAction(InputAction.CallbackContext obj) { }
         
         public virtual void OnPlayerStateChanged(){}
-
-        protected virtual void ToggleFireAction(bool isActive)
-        {
-            if (isActive)
-            {
-                _fireActionReference.action.Enable();
-                return;
-            }
-            
-            _fireActionReference.action.Disable();
-        }
         
         public virtual void OnItemEquipped(Item_SO itemData)
         {

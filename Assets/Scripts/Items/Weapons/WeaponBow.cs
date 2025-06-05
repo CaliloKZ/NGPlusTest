@@ -10,7 +10,7 @@ namespace Items
         [SerializeField] string arrowPrefabId;
         [SerializeField] Transform arrowSpawnPoint;
     
-        [SerializeField] float chargeTime = 0.5f;
+        [SerializeField] float chargeTime = 0.25f;
     
         float _chargeTimer = 0f;
         bool _isCharging = false;
@@ -39,7 +39,6 @@ namespace Items
         {
             PlayerState newState = PlayerInputController.CurrentState;
             ToggleCharging(newState == PlayerState.Shooting);
-            ToggleFireAction(newState != PlayerState.Shooting);
         }
 
         void ToggleCharging(bool isCharging)
