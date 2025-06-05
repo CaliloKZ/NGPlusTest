@@ -92,7 +92,7 @@
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -615,7 +615,7 @@
                     "name": "",
                     "id": "941109df-a490-4a62-9bc6-c464aa79375b",
                     "path": "<Keyboard>/i",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "OpenInventory",
@@ -1300,7 +1300,7 @@
                     "name": "",
                     "id": "c0e65e88-51ba-45d4-8a00-0e8840bfa903",
                     "path": "<Keyboard>/i",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "CloseInventory",

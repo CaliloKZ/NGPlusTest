@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1d41b3d-ebec-40d6-8338-0a0ba4777326" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Pool/TypedPoolObjects.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Pool/TypedPoolObjects.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/InventorySaveData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/InventorySaveData.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackDown.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackDown.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackSide.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackSide.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackUp.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Hero.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Hero.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleSide.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleSide.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootDown.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootDown.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootSide.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootSide.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootUp.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkSide.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkSide.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.NGPTest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NGPTest/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputSystem_Actions.inputactions" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Items/Consumables/Item_Beaf.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Items/Consumables/Item_Beaf.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Items/Consumables/Item_Fish.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Items/Consumables/Item_Fish.prefab" afterDir="false" />
@@ -46,6 +30,8 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/InventorySystem.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inventory/InventorySystem.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/ItemDragHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inventory/ItemDragHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/Item_SO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inventory/Item_SO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Items/Consumable/ConsumableFood.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Items/Consumable/ConsumableFood.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Items/EquipItems.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Items/EquipItems.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Items/ItemCollectable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Items/ItemCollectable.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Items/Weapons/Arrow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Items/Weapons/Arrow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Items/Weapons/WeaponBow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Items/Weapons/WeaponBow.cs" afterDir="false" />
@@ -56,6 +42,8 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInteractController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInteractController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pool/FastPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pool/FastPool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pool/PoolObjects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pool/PoolObjects.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pool/TypedPoolObjects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pool/TypedPoolObjects.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/InventorySaveData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/InventorySaveData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveController.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveData.cs" afterDir="false" />
@@ -73,11 +61,15 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/Items/Weapons/1_Bow.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/Items/Weapons/1_Bow.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/PoolObjects/HeroPool.asset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/PoolObjects/HeroPool.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tool/DrawSphereGizmo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tool/DrawSphereGizmo.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HotkeyButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HotkeyButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/NPCDialogueUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/NPCDialogueUI.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/VFX.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/VFX/EffectTimer.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/VFX/EffectTimer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/Items/Food/Beaf.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Items/Food/Beaf.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/Items/Food/Fish.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Items/Food/Fish.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/Items/Food/Shrimp.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Items/Food/Shrimp.png.meta" afterDir="false" />
@@ -89,6 +81,11 @@
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/Items/Scroll/ScrollIce.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Items/Scroll/ScrollIce.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/Items/Weapons/BigSword/Sprite.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Items/Weapons/BigSword/Sprite.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/Items/Weapons/Bow/Sprite.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Items/Weapons/Bow/Sprite.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Player/Knight/SeparateAnim/Walk.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Player/Knight/SeparateAnim/Walk.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +101,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2f9d421960d84dffaa88793de0f4b5f39b8200/50/4556940a/Editor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2f9d421960d84dffaa88793de0f4b5f39b8200/ad/88a00c42/GameObjectInspector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/36/22b579c3/Action`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/5c/92b8ec18/Action.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/80e3aa7f9e6f4e4dbf50a6d05b39dd184000/54/cb53a8b2/JsonUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/84f0d810adef4e6c8deab33e4ae93f7c1dec00/7f/84974bc4/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/84f0d810adef4e6c8deab33e4ae93f7c1dec00/83/8e84e805/UnityEventBase.cs" root0="SKIP_HIGHLIGHTING" />
@@ -153,6 +152,14 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/13\NGPTest.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="D:\UnityGames\BirbGames\NGPTest\Builds" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.35f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\UnityGames\BirbGames\NGPTest -debugCodeOptimization" />
@@ -207,7 +214,7 @@
       <option name="presentableId" value="Default" />
       <updated>1748893424977</updated>
       <workItem from="1748893426691" duration="93104000" />
-      <workItem from="1749125384182" duration="16999000" />
+      <workItem from="1749125384182" duration="31237000" />
     </task>
     <servers />
   </component>

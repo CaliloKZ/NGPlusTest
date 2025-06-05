@@ -61,7 +61,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &308186568376750074
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.00039765518, y: 0.06799928}
+  m_Offset: {x: 0.24807404, y: -0.009361275}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -106,7 +106,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.057006903, y: 0.06412141}
+  m_Size: {x: 0.30726483, y: 0.28854233}
   m_EdgeRadius: 0
 --- !u!114 &1829146526984980170
 MonoBehaviour:
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrowRigidbody: {fileID: 3607904206948774891}
-  speed: 3
+  speed: 10
   hitParticleEffectID: Arrow_Hit
 --- !u!1 &7186651852882880856
 GameObject:
