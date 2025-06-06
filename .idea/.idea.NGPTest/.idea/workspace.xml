@@ -5,28 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1d41b3d-ebec-40d6-8338-0a0ba4777326" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NGPTest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NGPTest/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackDown.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackDown.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackLeft.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackLeft.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackRight.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackRight.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Attack/Base/AttackUp.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Hero.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Hero.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleDown.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleDown.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleLeft.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleLeft.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleRight.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleRight.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Idle/IdleUp.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootDown.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootDown.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootLeft.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootLeft.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootRight.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootRight.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Shoot/ShootUp.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkDown.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkDown.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkLeft.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkLeft.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkRight.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkRight.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Hero/Walk/WalkUp.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAnimController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAnimController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInputController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInputController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +134,7 @@
       <updated>1748893424977</updated>
       <workItem from="1748893426691" duration="93104000" />
       <workItem from="1749125384182" duration="31237000" />
-      <workItem from="1749175633368" duration="3387000" />
+      <workItem from="1749175633368" duration="4232000" />
     </task>
     <servers />
   </component>
