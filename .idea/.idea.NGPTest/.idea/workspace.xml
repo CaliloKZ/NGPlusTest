@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1d41b3d-ebec-40d6-8338-0a0ba4777326" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
-    </list>
+    <list default="true" id="d1d41b3d-ebec-40d6-8338-0a0ba4777326" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,7 +72,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/001\NGPTest.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/NGPTest\NGPTest.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="D:\UnityGames\BirbGames\NGPTest\Builds" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -134,7 +132,7 @@
       <updated>1748893424977</updated>
       <workItem from="1748893426691" duration="93104000" />
       <workItem from="1749125384182" duration="31237000" />
-      <workItem from="1749175633368" duration="4232000" />
+      <workItem from="1749175633368" duration="4474000" />
     </task>
     <servers />
   </component>

@@ -12,7 +12,7 @@ namespace Inventory
     
         public void SetItemAmount(int amount, bool isFull = false)
         {
-            if(amount <= 1)
+            if(amount <= 0)
             {
                 itemAmountText.SetText(string.Empty);
                 return;

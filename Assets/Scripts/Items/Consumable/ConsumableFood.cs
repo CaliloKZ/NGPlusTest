@@ -27,7 +27,6 @@ namespace Items.Consumable
             base.OnItemEquipped(itemData);
             ItemData = itemData;
             itemRenderer.sprite = itemData.itemIcon;
-            Debug.Log($"Consumable Equipped: {itemData.itemName}, {itemData.itemIcon.name}, {itemRenderer.sprite}");
         }
     }
 }
