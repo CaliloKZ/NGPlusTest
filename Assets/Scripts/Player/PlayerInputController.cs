@@ -88,7 +88,6 @@ namespace Player
         public static void ChangePlayerState(PlayerState newState)
         {
             CurrentState = newState;
-            Debug.Log($"Player state changed to: {CurrentState}");
             _instance.OnChangePlayerState();
         }
 

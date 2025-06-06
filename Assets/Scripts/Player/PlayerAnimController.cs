@@ -16,8 +16,11 @@ namespace Player
         [SerializeField] SpriteRenderer spriteRenderer;
         [SerializeField] Transform bodyTransform;
         [SerializeField] Transform meleeAttackRangeCenter;
+        
+        [SerializeField] List<Sprite> playerSprites = new List<Sprite>();
     
         Dictionary<AnimatorParameter, int> _parametersHash;
+        Dictionary<string, Sprite> _animationSprites;
 
         void Awake()
         {
@@ -32,6 +35,32 @@ namespace Player
                 { AnimatorParameter.Horizontal, Animator.StringToHash(HORIZONTAL_PARAM) },
                 { AnimatorParameter.Vertical, Animator.StringToHash(VERTICAL_PARAM) }
             };
+            
+            _animationSprites = new Dictionary<string, Sprite>
+            {
+                { "IdleUp", playerSprites[0]},
+                { "IdleDown",  playerSprites[1]},
+                { "IdleRight",  playerSprites[2]},
+                { "IdleLeft", playerSprites[3]},
+                { "WalkUp", playerSprites[0]},
+                { "WalkDown", playerSprites[1]},
+                { "WalkRight", playerSprites[2]},
+                { "WalkLeft", playerSprites[3]},
+                { "ShootUp", playerSprites[4]},
+                { "ShootDown", playerSprites[5]},
+                { "ShootRight", playerSprites[6]},
+                { "ShootLeft", playerSprites[7]},
+                { "AttackUp", playerSprites[4]},
+                { "AttackDown", playerSprites[5]},
+                { "AttackRight", playerSprites[6]},
+                { "AttackLeft", playerSprites[7]}
+            };
+        }
+
+        private void FixedUpdate()
+        {
+            string animationName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+            spriteRenderer.sprite = _animationSprites[animationName];
         }
     
         public void OnPlayerStateChanged()
@@ -62,11 +91,6 @@ namespace Player
     
         void Attack()
         {
-            // meleeAttackRangeCenter.position += new Vector3(
-            //     animator.GetFloat(_parametersHash[AnimatorParameter.Horizontal]),
-            //     animator.GetFloat(_parametersHash[AnimatorParameter.Vertical]),
-            //      0);
-            //
             animator.SetTrigger(_parametersHash[AnimatorParameter.Attack]);
         }
     
