@@ -19,11 +19,11 @@ namespace Inventory
             InventorySystem.OnEndItemDragAction -= OnEndDrag;
         }
 
-        void OnBeginDrag(InventorySlot slot)
+        void OnBeginDrag(InventorySlotUI slotUI)
         {
-            transform.position = slot.transform.position;
+            transform.position = slotUI.transform.position;
         
-            itemIconImage.sprite = slot.SlotData.itemData.itemIcon;
+            itemIconImage.sprite = slotUI.SlotData.itemData.itemIcon;
             itemIconImage.enabled = true;
         }
 

@@ -17,19 +17,19 @@ namespace Inventory
         public static ItemDragHandler DragItem { get; private set; }
         public static InventorySlot_SO EquippedItemSlot { get; private set; }
 
-        public static Action<InventorySlot> OnBeginItemDragAction;
+        public static Action<InventorySlotUI> OnBeginItemDragAction;
         public static Action OnEndItemDragAction;
-        public static Action<InventorySlot, int> OnItemDropAction;
+        public static Action<InventorySlotUI, int> OnItemDropAction;
         
         public static Action OnItemUseAction;
-        public static Action<InventorySlot> OnItemSelectAction;
+        public static Action<InventorySlotUI> OnItemSelectAction;
         public static Action<ItemCollectable> OnItemPickupAction; 
         public static Action<InventorySlot_SO> OnItemEquipAction; 
         public static Action OnItemUnequipAction; 
         
         public static Action<InventorySlot_SO> OnSlotUpdateAction; 
         
-        [SerializeField] List<InventorySlot> inventorySlots = new();
+        [SerializeField] List<InventorySlotUI> inventorySlots = new();
         [SerializeField] List<HotBarSlot> hotBarSlots = new();
         [SerializeField] GameObject inventoryPanel;
         [SerializeField] Image equippedItemIconImage;
@@ -41,12 +41,12 @@ namespace Inventory
         [SerializeField] float minDropDistance = 0.5f;
         [SerializeField] float maxDropDistance = 1.5f;
     
-        Dictionary<int, InventorySlot> _slotsInstanceDictionary;
-        InventorySlot _selectedSlot;
+        Dictionary<int, InventorySlotUI> _slotsInstanceDictionary;
+        InventorySlotUI _selectedSlotUI;
         
         void Awake()
         {
-            _slotsInstanceDictionary = new Dictionary<int, InventorySlot>();
+            _slotsInstanceDictionary = new Dictionary<int, InventorySlotUI>();
             foreach (var slot in inventorySlots)
             {
                 _slotsInstanceDictionary.Add(slot.gameObject.GetInstanceID(), slot);
@@ -81,7 +81,7 @@ namespace Inventory
             Item_SO itemData = item.itemData;
             
             if (!itemData.isStackable
-                || !TryGetStackOrEmptySlot(itemData.itemID, out InventorySlot targetSlot))
+                || !TryGetStackOrEmptySlot(itemData.itemID, out InventorySlotUI targetSlot))
             {
                 targetSlot = inventorySlots.Find(slot => !slot.SlotData.TryGetItemData(out _));
                 if (targetSlot == null)
@@ -104,10 +104,10 @@ namespace Inventory
             SaveInventory();
         }
 
-        bool TryGetStackOrEmptySlot(int itemID, out InventorySlot stackSlot)
+        bool TryGetStackOrEmptySlot(int itemID, out InventorySlotUI stackSlotUI)
         {
-            stackSlot = inventorySlots.Find(slot => slot.SlotData.CanStack(itemID));
-            return stackSlot != null;
+            stackSlotUI = inventorySlots.Find(slot => slot.SlotData.CanStack(itemID));
+            return stackSlotUI != null;
         }
         
         public List<InventorySaveData> SaveInventory()
@@ -140,21 +140,21 @@ namespace Inventory
             }
         }
 
-        void OnItemDrop(InventorySlot oldSlot, int newSlotID)
+        void OnItemDrop(InventorySlotUI oldSlotUI, int newSlotID)
         {
-            if(null == oldSlot || null == oldSlot.SlotData.itemData)
+            if(null == oldSlotUI || null == oldSlotUI.SlotData.itemData)
                 return;
             
             if (newSlotID == inventoryPanel.GetInstanceID())
             {
-                DropItem(oldSlot);
+                DropItem(oldSlotUI);
                 return;
             }
             
-            if (!_slotsInstanceDictionary.TryGetValue(newSlotID, out InventorySlot newSlot)) 
+            if (!_slotsInstanceDictionary.TryGetValue(newSlotID, out InventorySlotUI newSlot)) 
                 return;
             
-            InventorySlot_SO oldSlotData = oldSlot.SlotData;
+            InventorySlot_SO oldSlotData = oldSlotUI.SlotData;
             
             bool newSlotHasItemData = newSlot.SlotData.TryGetItemData(out Item_SO itemData);
             int newStackSize = newSlot.SlotData.stackSize;
@@ -166,12 +166,12 @@ namespace Inventory
                 {
                     int overflowAmount = newStackSize - itemData.maxStackSize;
                     newSlot.SetItemData(itemData, itemData.maxStackSize);
-                    oldSlot.SetItemData(itemData, overflowAmount);
+                    oldSlotUI.SetItemData(itemData, overflowAmount);
                 }
                 else
                 {
                     newSlot.SetItemData(itemData, newStackSize);
-                    oldSlot.ClearSlot();
+                    oldSlotUI.ClearSlot();
                 }
                 
                 OnItemSelected(newSlot);
@@ -183,22 +183,22 @@ namespace Inventory
             
             if (newSlotHasItemData)
             {
-                oldSlot.SetItemData(itemData, newStackSize);
+                oldSlotUI.SetItemData(itemData, newStackSize);
                 return;
             }
             
-            oldSlot.ClearSlot();
+            oldSlotUI.ClearSlot();
         }
 
-        void OnItemSelected(InventorySlot slot)
+        void OnItemSelected(InventorySlotUI slotUI)
         {
-            if (null != _selectedSlot)
-                _selectedSlot.ToggleItemSelectedBorder(false);
+            if (null != _selectedSlotUI)
+                _selectedSlotUI.ToggleItemSelectedBorder(false);
         
-            _selectedSlot = slot;
-            _selectedSlot.ToggleItemSelectedBorder(true);
+            _selectedSlotUI = slotUI;
+            _selectedSlotUI.ToggleItemSelectedBorder(true);
         
-            Item_SO itemData = slot.SlotData.itemData;
+            Item_SO itemData = slotUI.SlotData.itemData;
             itemDescriptionUI.SetItemDescription(itemData.itemIcon, itemData.itemName, itemData.itemDescription);
         }
 
@@ -218,9 +218,9 @@ namespace Inventory
             equippedItemIconImage.enabled = false;
         }
 
-        void DropItem(InventorySlot slot)
+        void DropItem(InventorySlotUI slotUI)
         {
-            if(EquippedItemSlot == slot.SlotData)
+            if(EquippedItemSlot == slotUI.SlotData)
             {
                 OnItemUnequipAction?.Invoke();
             }
@@ -228,15 +228,15 @@ namespace Inventory
             Vector2 dropOffset = Random.insideUnitCircle.normalized * Random.Range(minDropDistance, maxDropDistance);
             Vector2 dropPosition = (Vector2)PlayerInputController.PlayerTransform.position + dropOffset;
             
-            ItemCollectable item = FastPool.Instantiate<ItemCollectable>(slot.SlotData.itemData.prefabID, dropPosition, quaternion.identity);
-            item.SetItemAmount(slot.SlotData.stackSize);
+            ItemCollectable item = FastPool.Instantiate<ItemCollectable>(slotUI.SlotData.itemData.prefabID, dropPosition, quaternion.identity);
+            item.SetItemAmount(slotUI.SlotData.stackSize);
             
-            slot.ClearSlot();
+            slotUI.ClearSlot();
         }
 
         public void ResetInventory()
         {
-            foreach (InventorySlot slot in inventorySlots)
+            foreach (InventorySlotUI slot in inventorySlots)
             {
                 slot.ClearSlot();
             }
