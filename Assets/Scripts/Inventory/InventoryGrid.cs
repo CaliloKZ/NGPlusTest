@@ -24,8 +24,6 @@ namespace Inventory
             _inventoryGrid = new UIGrid<InventorySlot>(
                 width: InventorySettings.width,
                 height: InventorySettings.height,
-                cellSize: InventorySettings.cellSize,
-                originPosition: InventorySettings.originPosition,
                 createGridObject: (grid, x, y) => new InventorySlot()
             );
         }
