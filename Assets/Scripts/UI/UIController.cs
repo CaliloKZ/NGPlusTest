@@ -35,8 +35,8 @@ namespace UI
             gameplayUI.SetActive(!isActive);
             PlayerInputController.ToggleInputActions(!isActive);
             
-            if(!isActive)
-                SaveController.StartSaveGame();
+            // if(!isActive)
+            //     SaveController.StartSaveGame();
         }
 
         public void OnDialogUIToggle(bool isActive)

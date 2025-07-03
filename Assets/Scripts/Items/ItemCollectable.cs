@@ -1,3 +1,4 @@
+using GameEvents;
 using Inventory;
 using UnityEngine;
 
@@ -6,12 +7,19 @@ namespace Items
     public class ItemCollectable : MonoBehaviour
     {
         const string PlayerTag = "Player";
+        public int Amount { get; private set; } = 1;
         public Item_SO itemData;
-        public int amount = 1;
+        
+        [SerializeField] GameEvent<ItemCollectable> onItemPickup;
 
         public void SetItemAmount(int newAmount)
         {
-            amount = newAmount;
+            Amount = newAmount;
+        }
+
+        public void ItemCollected()
+        {
+            gameObject.SetActive(false);
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -19,7 +27,7 @@ namespace Items
             if (!other.CompareTag(PlayerTag)) 
                 return;
         
-            InventorySystem.OnItemPickupAction?.Invoke(this);
+            onItemPickup.Raise(this);
         }
     }
 }

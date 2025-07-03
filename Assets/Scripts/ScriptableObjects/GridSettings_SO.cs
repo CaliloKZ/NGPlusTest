@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
-using GridSystem;
-using Inventory;
 
+[CreateAssetMenu(fileName = "GridSettings_SO", menuName = "Scriptable Objects/GridSettings_SO")]
 public class GridSettings_SO : ScriptableObject
 {
     [Header("Grid Settings")]

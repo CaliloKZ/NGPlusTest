@@ -924,6 +924,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 60690099}
   itemIconImage: {fileID: 1631512124}
   itemSelectedBorder: {fileID: 2114767992}
+  _dragHandler: {fileID: 0}
 --- !u!114 &60690097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,7 +1414,6 @@ GameObject:
   m_Component:
   - component: {fileID: 112534992}
   - component: {fileID: 112534994}
-  - component: {fileID: 112534995}
   m_Layer: 5
   m_Name: InventoryUI
   m_TagString: Untagged
@@ -1449,51 +1449,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112534991}
   m_CullTransparentMesh: 1
---- !u!114 &112534995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112534991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a3b6a6e063ed204b81c79c3cd1f5071, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventorySlots:
-  - {fileID: 976631517}
-  - {fileID: 882825101}
-  - {fileID: 342862574}
-  - {fileID: 2095999284}
-  - {fileID: 60690096}
-  - {fileID: 783973053}
-  - {fileID: 1288710448}
-  - {fileID: 1420200979}
-  - {fileID: 344273327}
-  - {fileID: 465654028}
-  - {fileID: 166750594}
-  - {fileID: 433981021}
-  - {fileID: 1688985822}
-  - {fileID: 2059051609}
-  - {fileID: 2094522831}
-  - {fileID: 1566388255}
-  - {fileID: 1904306409}
-  - {fileID: 776806990}
-  hotBarSlots:
-  - {fileID: 1712531801}
-  - {fileID: 852522740}
-  - {fileID: 1818090910}
-  - {fileID: 1517863008}
-  - {fileID: 630345694}
-  - {fileID: 1089777475}
-  inventoryPanel: {fileID: 1443359310}
-  equippedItemIconImage: {fileID: 707990679}
-  dragItem: {fileID: 1262694760}
-  itemDescriptionUI: {fileID: 2075505200}
-  itemBook: {fileID: 11400000, guid: 513853b23627a174aaa022e9f45d3aaf, type: 2}
-  minDropDistance: 0.5
-  maxDropDistance: 1.5
 --- !u!1 &116090803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +1858,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 166750595}
   itemIconImage: {fileID: 845603546}
   itemSelectedBorder: {fileID: 1185988939}
+  _dragHandler: {fileID: 0}
 --- !u!114 &166750595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2062,6 +2018,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: 187143c71e6610f4a8473b1f9d42541a, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: 187143c71e6610f4a8473b1f9d42541a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.4242134
@@ -2112,7 +2072,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: 187143c71e6610f4a8473b1f9d42541a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1849579149}
+      addedObject: {fileID: 1849579154}
   m_SourcePrefab: {fileID: 100100000, guid: 187143c71e6610f4a8473b1f9d42541a, type: 3}
 --- !u!4 &194290675 stripped
 Transform:
@@ -2205,6 +2165,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: fc14b56810e45bc4287b6c61b65cadd5, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: fc14b56810e45bc4287b6c61b65cadd5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.8542137
@@ -2255,7 +2219,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: fc14b56810e45bc4287b6c61b65cadd5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1523847036}
+      addedObject: {fileID: 1523847041}
   m_SourcePrefab: {fileID: 100100000, guid: fc14b56810e45bc4287b6c61b65cadd5, type: 3}
 --- !u!4 &218319406 stripped
 Transform:
@@ -3182,6 +3146,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: ec08e41fcb9c70344b4d54423bac1bcd, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: ec08e41fcb9c70344b4d54423bac1bcd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.1742134
@@ -3232,7 +3200,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: ec08e41fcb9c70344b4d54423bac1bcd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1592765255}
+      addedObject: {fileID: 1592765260}
   m_SourcePrefab: {fileID: 100100000, guid: ec08e41fcb9c70344b4d54423bac1bcd, type: 3}
 --- !u!4 &297593034 stripped
 Transform:
@@ -3460,6 +3428,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 342862577}
   itemIconImage: {fileID: 602005684}
   itemSelectedBorder: {fileID: 466089825}
+  _dragHandler: {fileID: 0}
 --- !u!114 &342862575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3608,6 +3577,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 344273328}
   itemIconImage: {fileID: 506724492}
   itemSelectedBorder: {fileID: 578449390}
+  _dragHandler: {fileID: 0}
 --- !u!114 &344273328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4453,6 +4423,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 433981022}
   itemIconImage: {fileID: 920236767}
   itemSelectedBorder: {fileID: 1041262962}
+  _dragHandler: {fileID: 0}
 --- !u!114 &433981022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5011,6 +4982,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 465654029}
   itemIconImage: {fileID: 1925475785}
   itemSelectedBorder: {fileID: 1744324858}
+  _dragHandler: {fileID: 0}
 --- !u!114 &465654029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5365,6 +5337,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: 8cf7f530c9d8d044bb30efdf74519c39, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: 8cf7f530c9d8d044bb30efdf74519c39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.1042137
@@ -5415,7 +5391,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: 8cf7f530c9d8d044bb30efdf74519c39, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 972523698}
+      addedObject: {fileID: 972523703}
   m_SourcePrefab: {fileID: 100100000, guid: 8cf7f530c9d8d044bb30efdf74519c39, type: 3}
 --- !u!4 &501204267 stripped
 Transform:
@@ -6135,6 +6111,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: 839433139e1950f448e7e9d9ad82ffb9, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: 839433139e1950f448e7e9d9ad82ffb9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.1242142
@@ -6185,7 +6165,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: 839433139e1950f448e7e9d9ad82ffb9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1550785768}
+      addedObject: {fileID: 1550785773}
   m_SourcePrefab: {fileID: 100100000, guid: 839433139e1950f448e7e9d9ad82ffb9, type: 3}
 --- !u!4 &560923295 stripped
 Transform:
@@ -7048,6 +7028,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: 5c93ec5ea3d2ae14387054a7ec412b66, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: 5c93ec5ea3d2ae14387054a7ec412b66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.284214
@@ -7098,7 +7082,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: 5c93ec5ea3d2ae14387054a7ec412b66, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1106750791}
+      addedObject: {fileID: 1106750796}
   m_SourcePrefab: {fileID: 100100000, guid: 5c93ec5ea3d2ae14387054a7ec412b66, type: 3}
 --- !u!4 &672323654 stripped
 Transform:
@@ -8116,6 +8100,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 776806991}
   itemIconImage: {fileID: 1330945899}
   itemSelectedBorder: {fileID: 1543325761}
+  _dragHandler: {fileID: 0}
 --- !u!114 &776806991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8189,6 +8174,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 783973056}
   itemIconImage: {fileID: 332668028}
   itemSelectedBorder: {fileID: 259136498}
+  _dragHandler: {fileID: 0}
 --- !u!114 &783973054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8424,7 +8410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2780772c334e09346ab31b2ce1b37802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySystem: {fileID: 112534995}
+  inventorySystem: {fileID: 0}
+  _saveLocation: 
 --- !u!1 &811850855
 GameObject:
   m_ObjectHideFlags: 0
@@ -9453,6 +9440,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 882825104}
   itemIconImage: {fileID: 2039894904}
   itemSelectedBorder: {fileID: 1573862934}
+  _dragHandler: {fileID: 0}
 --- !u!114 &882825102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10050,7 +10038,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7175098536672208628, guid: 8cf7f530c9d8d044bb30efdf74519c39, type: 3}
   m_PrefabInstance: {fileID: 501204266}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &972523698
+--- !u!114 &972523703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10121,6 +10109,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 976631520}
   itemIconImage: {fileID: 1556950728}
   itemSelectedBorder: {fileID: 2018936023}
+  _dragHandler: {fileID: 0}
 --- !u!114 &976631518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10182,6 +10171,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: 97dc72ed990041b4fbbd082b85e6257b, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: 97dc72ed990041b4fbbd082b85e6257b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.1657867
@@ -10232,7 +10225,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: 97dc72ed990041b4fbbd082b85e6257b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1210542608}
+      addedObject: {fileID: 1210542613}
   m_SourcePrefab: {fileID: 100100000, guid: 97dc72ed990041b4fbbd082b85e6257b, type: 3}
 --- !u!4 &984926713 stripped
 Transform:
@@ -11077,7 +11070,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7175098536672208628, guid: 5c93ec5ea3d2ae14387054a7ec412b66, type: 3}
   m_PrefabInstance: {fileID: 672323653}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1106750791
+--- !u!114 &1106750796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11839,7 +11832,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7175098536672208628, guid: 97dc72ed990041b4fbbd082b85e6257b, type: 3}
   m_PrefabInstance: {fileID: 984926712}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1210542608
+--- !u!114 &1210542613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11996,6 +11989,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: 672f349234e8e304b8d45253c5baf7df, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: 672f349234e8e304b8d45253c5baf7df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.4957848
@@ -12046,14 +12043,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: 672f349234e8e304b8d45253c5baf7df, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1230762193}
+      addedObject: {fileID: 1230762198}
   m_SourcePrefab: {fileID: 100100000, guid: 672f349234e8e304b8d45253c5baf7df, type: 3}
 --- !u!4 &1230762188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3573687404518941432, guid: 672f349234e8e304b8d45253c5baf7df, type: 3}
   m_PrefabInstance: {fileID: 1230762187}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1230762193
+--- !u!114 &1230762198
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12459,6 +12456,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 1288710449}
   itemIconImage: {fileID: 1327360766}
   itemSelectedBorder: {fileID: 1350182257}
+  _dragHandler: {fileID: 0}
 --- !u!114 &1288710449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33977,6 +33975,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 1420200980}
   itemIconImage: {fileID: 1174330539}
   itemSelectedBorder: {fileID: 530372924}
+  _dragHandler: {fileID: 0}
 --- !u!114 &1420200980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34000,6 +33999,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: 5f4e2fa311ede7e4ca4b7ca891ca640e, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: 5f4e2fa311ede7e4ca4b7ca891ca640e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.124214
@@ -34050,14 +34053,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: 5f4e2fa311ede7e4ca4b7ca891ca640e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1430001827}
+      addedObject: {fileID: 1430001832}
   m_SourcePrefab: {fileID: 100100000, guid: 5f4e2fa311ede7e4ca4b7ca891ca640e, type: 3}
 --- !u!4 &1430001822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3573687404518941432, guid: 5f4e2fa311ede7e4ca4b7ca891ca640e, type: 3}
   m_PrefabInstance: {fileID: 1430001821}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1430001827
+--- !u!114 &1430001832
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34252,6 +34255,7 @@ MonoBehaviour:
   - {fileID: 1774567089}
   - {fileID: 1774567089}
   - {fileID: 1774567089}
+  _currentEquippedItem: {fileID: 0}
 --- !u!61 &1438574884
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -34668,6 +34672,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482954636}
   m_CullTransparentMesh: 1
+--- !u!1 &1503332337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1503332338}
+  - component: {fileID: 1503332339}
+  m_Layer: 0
+  m_Name: InventorySystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1503332338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503332337}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1503332339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503332337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3b6a6e063ed204b81c79c3cd1f5071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCollectEvent: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
+  inventoryGrid:
+    <InventorySettings>k__BackingField: {fileID: 11400000, guid: 1199ca29c2cb62d49a17a59933848740, type: 2}
 --- !u!1 &1509406390
 GameObject:
   m_ObjectHideFlags: 0
@@ -35067,7 +35118,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7175098536672208628, guid: fc14b56810e45bc4287b6c61b65cadd5, type: 3}
   m_PrefabInstance: {fileID: 218319405}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1523847036
+--- !u!114 &1523847041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -35723,7 +35774,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7175098536672208628, guid: 839433139e1950f448e7e9d9ad82ffb9, type: 3}
   m_PrefabInstance: {fileID: 560923294}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1550785768
+--- !u!114 &1550785773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -36060,6 +36111,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 1566388256}
   itemIconImage: {fileID: 440733293}
   itemSelectedBorder: {fileID: 2119399597}
+  _dragHandler: {fileID: 0}
 --- !u!114 &1566388256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36158,6 +36210,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1181501524}
     m_Modifications:
+    - target: {fileID: 3112862779959594952, guid: d07080f265194734a9f8a809525ae6b3, type: 3}
+      propertyPath: onItemPickup
+      value: 
+      objectReference: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
     - target: {fileID: 3573687404518941432, guid: d07080f265194734a9f8a809525ae6b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.4757843
@@ -36208,14 +36264,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7175098536672208628, guid: d07080f265194734a9f8a809525ae6b3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1579059701}
+      addedObject: {fileID: 1579059706}
   m_SourcePrefab: {fileID: 100100000, guid: d07080f265194734a9f8a809525ae6b3, type: 3}
 --- !u!4 &1579059696 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3573687404518941432, guid: d07080f265194734a9f8a809525ae6b3, type: 3}
   m_PrefabInstance: {fileID: 1579059695}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1579059701
+--- !u!114 &1579059706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -36505,7 +36561,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7175098536672208628, guid: ec08e41fcb9c70344b4d54423bac1bcd, type: 3}
   m_PrefabInstance: {fileID: 297593033}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1592765255
+--- !u!114 &1592765260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37000,6 +37056,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 1688985823}
   itemIconImage: {fileID: 657556560}
   itemSelectedBorder: {fileID: 1533265049}
+  _dragHandler: {fileID: 0}
 --- !u!114 &1688985823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38551,7 +38608,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7175098536672208628, guid: 187143c71e6610f4a8473b1f9d42541a, type: 3}
   m_PrefabInstance: {fileID: 194290674}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1849579149
+--- !u!114 &1849579154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -38915,6 +38972,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 1904306410}
   itemIconImage: {fileID: 2061775140}
   itemSelectedBorder: {fileID: 615698758}
+  _dragHandler: {fileID: 0}
 --- !u!114 &1904306410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39189,7 +39247,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 112534995}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Inventory.InventorySystem, Assembly-CSharp
         m_MethodName: ResetInventory
         m_Mode: 1
@@ -45579,6 +45637,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 2059051610}
   itemIconImage: {fileID: 1314102894}
   itemSelectedBorder: {fileID: 1768493073}
+  _dragHandler: {fileID: 0}
 --- !u!114 &2059051610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46234,6 +46293,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 2094522832}
   itemIconImage: {fileID: 116090805}
   itemSelectedBorder: {fileID: 1482954638}
+  _dragHandler: {fileID: 0}
 --- !u!114 &2094522832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46307,6 +46367,7 @@ MonoBehaviour:
   itemAmountTextUI: {fileID: 2095999287}
   itemIconImage: {fileID: 386002152}
   itemSelectedBorder: {fileID: 259456270}
+  _dragHandler: {fileID: 0}
 --- !u!114 &2095999285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46961,18 +47022,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1697901528}
-          m_TargetAssemblyTypeName: Items.Consumable.ConsumableFood, Assembly-CSharp
-          m_MethodName: OnPlayerStateChanged
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!4 &3788059323879527396
 Transform:
   m_ObjectHideFlags: 0
@@ -47098,3 +47147,4 @@ SceneRoots:
   - {fileID: 1927809348}
   - {fileID: 1184666116}
   - {fileID: 1181501524}
+  - {fileID: 1503332338}
