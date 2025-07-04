@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 147bbb0a569f92a44affcdc068b10a33, type: 2}
-  onItemPickup: {fileID: 11400000, guid: c035e9f2ba9e0d440bc9cd8bc0e540b6, type: 2}
+  onItemPickup: {fileID: 11400000, guid: 8e72acb3b43947147852fbb10172e316, type: 2}
 --- !u!95 &1613507941155694061
 Animator:
   serializedVersion: 7

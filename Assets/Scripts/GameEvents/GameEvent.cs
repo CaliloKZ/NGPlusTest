@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameEvents
 {
-    [CreateAssetMenu(fileName = "New GameEvent", menuName = "Scriptable Objects/GameEvent")]
+    [CreateAssetMenu(menuName = "Scriptable Objects/GameEvent/GameEvent")]
     public class GameEvent : ScriptableObject
     {
         readonly List<GameEventListener> _listeners = new();
@@ -18,7 +18,7 @@ namespace GameEvents
         public void UnregisterListener(GameEventListener listener) => _listeners.Remove(listener);
     }
     
-    public abstract class GameEvent<T> : ScriptableObject where T : MonoBehaviour
+    public abstract class GameEvent<T> : ScriptableObject
     {
         private readonly List<IGameEventListener<T>> _listeners = new();
 

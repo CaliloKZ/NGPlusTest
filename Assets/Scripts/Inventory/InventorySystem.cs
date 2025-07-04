@@ -2,45 +2,83 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameEvents;
+using Inventory.UI;
 using Items;
 using Player;
 using Pool;
 using SaveSystem;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Inventory
 {
-    public class InventorySystem : MonoBehaviour, IGameEventListener<ItemCollectable>
+    public class InventorySystem : MonoBehaviour, IGameEventListener<MonoBehaviour>
     {
-        [SerializeField] GameEvent<ItemCollectable> itemCollectEvent;
-        [SerializeField] InventoryGrid inventoryGrid = new();
+        public Inventory Inventory { get; } = new();
+        [SerializeField] InventoryUI inventoryUI;
+        [SerializeField] GridSettings_SO inventorySettings;
+        
+        [SerializeField] GameEvent<MonoBehaviour> itemCollectEvent;
+        [SerializeField] GameEvent updateInventoryUIEvent;
+        
+        [SerializeField] int minDropDistance;
+        [SerializeField] int maxDropDistance;
 
         private void Awake()
         {
             itemCollectEvent.RegisterListener(this);
-            inventoryGrid.CreateGrid();
+            Inventory.CreateGrid(inventorySettings);
+        }
+
+        void OnSlotUpdate(InventorySlot slot)
+        {
+            inventoryUI.UpdateSlot(slot);
         }
         
-        public void OnEventRaised(ItemCollectable source)
+        public void OnEventRaised(MonoBehaviour source)
         {
-            Debug.Log($"InventorySystem.OnItemCollectable: {source.itemData.name}");
-            
-            if (!inventoryGrid.TryAddItem(source.itemData, source.Amount, out int remainingAmount))
+            switch (source)
             {
-                source.SetItemAmount(remainingAmount);
+                case ItemCollectable itemCollectable:
+                    OnItemCollected(itemCollectable);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void OnItemCollected(ItemCollectable item)
+        {
+            Debug.Log($"InventorySystem.OnItemCollectable: {item.itemData.name}");
+            
+            if (!Inventory.TryAddItem(item.itemData, item.Amount, out int remainingAmount))
+            {
+                item.SetItemAmount(remainingAmount);
                 return;
             }
             
-            source.ItemCollected();
+            item.ItemCollected();
+            UpdateInventoryUI();
+        }
+
+        public void OnItemDrop(InventorySlot slot)
+        {
+            Inventory.DropItem(slot);
+            Vector2 dropOffset = Random.insideUnitCircle.normalized * Random.Range(minDropDistance, maxDropDistance);
+            Vector2 dropPosition = (Vector2)PlayerInputController.PlayerTransform.position + dropOffset;
+            
+            ItemCollectable item = FastPool.Instantiate<ItemCollectable>(slot.ItemData.prefabID, dropPosition, quaternion.identity);
+            item.SetItemAmount(slot.StackSize);
+            
             UpdateInventoryUI();
         }
 
         void UpdateInventoryUI()
         {
-            
+            updateInventoryUIEvent.Raise();
         }
 
         #region old

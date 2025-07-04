@@ -6,8 +6,9 @@ namespace Inventory
     {
         public Item_SO ItemData { get; private set; } 
         public int StackSize { get; private set; } 
+        public int SlotIndex { get; private set; }
         
-        bool _slotChanged = false;
+        public bool IsSelected { get; private set; }
 
         public bool CanStack(int itemID)
         {
@@ -44,6 +45,11 @@ namespace Inventory
             int amountToAdd = Mathf.Min(spaceLeft, amount);
             StackSize += amountToAdd;
             return amountToAdd;
+        }
+
+        public void SetSlotIndex(int slotIndex)
+        {
+            SlotIndex = slotIndex;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Items
         public int Amount { get; private set; } = 1;
         public Item_SO itemData;
         
-        [SerializeField] GameEvent<ItemCollectable> onItemPickup;
+        [SerializeField] GameEvent<MonoBehaviour> onItemPickup;
 
         public void SetItemAmount(int newAmount)
         {

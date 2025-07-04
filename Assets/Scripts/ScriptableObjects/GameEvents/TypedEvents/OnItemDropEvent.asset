@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243a29082f2d2b54f97fddb1a3f4acfd, type: 3}
-  m_Name: Slot_13
+  m_Script: {fileID: 11500000, guid: a73cb340610941c388bef29b18eaeca2, type: 3}
+  m_Name: OnItemDropEvent
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  stackSize: 0
