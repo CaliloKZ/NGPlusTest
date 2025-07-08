@@ -1,5 +1,4 @@
 using Player;
-using SaveSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,8 +8,8 @@ namespace UI
     {
         [SerializeField] InputActionReference toggleInventoryAction;
         
-        [SerializeField] GameObject inventoryUI;
-        [SerializeField] GameObject gameplayUI;
+        [SerializeField] GameObject inventoryHolder;
+        [SerializeField] GameObject gameplayHolder;
         
         void Awake()
         {
@@ -26,13 +25,13 @@ namespace UI
         
         void ToggleInventoryUI(InputAction.CallbackContext obj)
         {
-            ToggleInventoryUI(!inventoryUI.activeSelf);
+            ToggleInventoryUI(!inventoryHolder.activeSelf);
         }
         
         public void ToggleInventoryUI(bool isActive)
         {
-            inventoryUI.SetActive(isActive);
-            gameplayUI.SetActive(!isActive);
+            inventoryHolder.SetActive(isActive);
+            gameplayHolder.SetActive(!isActive);
             PlayerInputController.ToggleInputActions(!isActive);
             
             // if(!isActive)
@@ -41,7 +40,7 @@ namespace UI
 
         public void OnDialogUIToggle(bool isActive)
         {
-            gameplayUI.SetActive(!isActive);
+            gameplayHolder.SetActive(!isActive);
             PlayerInputController.ToggleInputActions(!isActive);
         }
     }

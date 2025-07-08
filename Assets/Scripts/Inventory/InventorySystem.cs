@@ -15,27 +15,43 @@ using Random = UnityEngine.Random;
 
 namespace Inventory
 {
-    public class InventorySystem : MonoBehaviour, IGameEventListener<MonoBehaviour>
+    public class InventorySystem : MonoBehaviour, IGameEventListener<MonoBehaviour>, IGameEventListener<InventorySlot>, IGameEventListener<InventorySlot, GameObject>
     {
-        public Inventory Inventory { get; } = new();
         [SerializeField] InventoryUI inventoryUI;
         [SerializeField] GridSettings_SO inventorySettings;
         
+        [SerializeField] GameEvent<ScriptableObject> onItemEquipped;
         [SerializeField] GameEvent<MonoBehaviour> itemCollectEvent;
-        [SerializeField] GameEvent updateInventoryUIEvent;
+        [SerializeField] GameEvent<InventorySlot> onItemDroppedEvent;
+        [SerializeField] GameEvent<InventorySlot> onSlotSelectedEvent;
+        [SerializeField] GameEvent<InventorySlot, GameObject> onSlotSwapEvent;
         
-        [SerializeField] int minDropDistance;
-        [SerializeField] int maxDropDistance;
+        readonly InventoryClass _inventoryClass = new();
 
-        private void Awake()
+        void Awake()
         {
             itemCollectEvent.RegisterListener(this);
-            Inventory.CreateGrid(inventorySettings);
+            onItemDroppedEvent.RegisterListener(this);
+            onSlotSelectedEvent.RegisterListener(this);
+            onSlotSwapEvent.RegisterListener(this);
+            
+            _inventoryClass.OnSlotSetup += SetupInventoryClassSlotUI;
+            _inventoryClass.CreateGrid(inventorySettings);
         }
 
-        void OnSlotUpdate(InventorySlot slot)
+        private void OnDestroy()
         {
-            inventoryUI.UpdateSlot(slot);
+            itemCollectEvent.UnregisterListener(this);
+            onItemDroppedEvent.UnregisterListener(this);
+            onSlotSelectedEvent.UnregisterListener(this);
+            onSlotSwapEvent.UnregisterListener(this);
+            
+            _inventoryClass.OnSlotSetup -= SetupInventoryClassSlotUI;
+        }
+
+        void SetupInventoryClassSlotUI(InventorySlot slot)
+        {
+            inventoryUI.SlotSetup(slot);
         }
         
         public void OnEventRaised(MonoBehaviour source)
@@ -50,35 +66,42 @@ namespace Inventory
             }
         }
 
+        public void OnEventRaised(InventorySlot slot)
+        {
+            _inventoryClass.SetSelectedSlot(slot);
+            inventoryUI.ItemSelected(slot.ItemData);
+            onItemEquipped.Raise(slot.ItemData);
+        }
+        
+        public void OnEventRaised(InventorySlot slot, GameObject pointerEnter)
+        {
+            if (pointerEnter.TryGetComponent(out InventorySlotUI slotUI))
+            {
+                _inventoryClass.SwapSlots(slot, slotUI.Slot);
+                return;
+            }
+
+            if (!pointerEnter.transform.parent.TryGetComponent(out InventoryUI _)) 
+                return;
+            
+            OnItemDrop(slot);
+        }
+
         void OnItemCollected(ItemCollectable item)
         {
-            Debug.Log($"InventorySystem.OnItemCollectable: {item.itemData.name}");
-            
-            if (!Inventory.TryAddItem(item.itemData, item.Amount, out int remainingAmount))
+            if (!_inventoryClass.TryAddItem(item.itemData, item.Amount, out int remainingAmount))
             {
                 item.SetItemAmount(remainingAmount);
                 return;
             }
             
             item.ItemCollected();
-            UpdateInventoryUI();
         }
 
-        public void OnItemDrop(InventorySlot slot)
+        void OnItemDrop(InventorySlot slot)
         {
-            Inventory.DropItem(slot);
-            Vector2 dropOffset = Random.insideUnitCircle.normalized * Random.Range(minDropDistance, maxDropDistance);
-            Vector2 dropPosition = (Vector2)PlayerInputController.PlayerTransform.position + dropOffset;
-            
-            ItemCollectable item = FastPool.Instantiate<ItemCollectable>(slot.ItemData.prefabID, dropPosition, quaternion.identity);
-            item.SetItemAmount(slot.StackSize);
-            
-            UpdateInventoryUI();
-        }
-
-        void UpdateInventoryUI()
-        {
-            updateInventoryUIEvent.Raise();
+            onItemDroppedEvent.Raise(slot);
+            _inventoryClass.DropItem(slot);
         }
 
         #region old

@@ -1,47 +1,52 @@
-// using System;
-// using System.Collections.Generic;
-// using Inventory;
-// using Items;
-// using UnityEngine;
-// using UnityEngine.InputSystem;
-//
-// namespace Player
-// {
-//     public class PlayerEquipmentController : MonoBehaviour
-//     {
-//         [SerializeField] InputActionReference fireActionReference;
-//         [SerializeField] List<EquipItems> equipItemsList = new();
-//         
-//         EquipItems _currentEquippedItem;
-//         
-//         void Start()
-//         {
-//             InventorySystem.OnItemEquipAction += EquipItem;
-//             InventorySystem.OnItemUnequipAction += UnequipItem;
-//         }
-//
-//         void OnDestroy()
-//         {
-//             InventorySystem.OnItemEquipAction -= EquipItem;
-//             InventorySystem.OnItemUnequipAction -= UnequipItem;
-//         }
-//
-//         void EquipItem(InventorySlot_SO slotData)
-//         {
-//             if (null != _currentEquippedItem)
-//                 _currentEquippedItem.OnItemUnequipped();
-//             
-//             _currentEquippedItem = equipItemsList[slotData.itemData.itemID];
-//             _currentEquippedItem.OnItemEquipped(slotData.itemData);
-//         }
-//         
-//         void UnequipItem()
-//         {
-//             if (null == _currentEquippedItem)
-//                 return;
-//             
-//             _currentEquippedItem.OnItemUnequipped();
-//             _currentEquippedItem = null;
-//         }
-//     }
-// }
+using System.Collections.Generic;
+using GameEvents;
+using Inventory;
+using Items;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace Player
+{
+    public class PlayerEquipmentController : MonoBehaviour, IGameEventListener<ScriptableObject>
+    {
+        [SerializeField] GameEvent<ScriptableObject> onItemEquipped;
+        [SerializeField] GameEvent<ScriptableObject> onItemUsed;
+        [SerializeField] InputActionReference fireActionReference;
+        [SerializeField] List<EquipItems> equipItemsList = new();
+        
+        EquipItems _currentEquippedItem;
+        
+        void Start()
+        {
+            onItemEquipped.RegisterListener(this);
+            onItemUsed.RegisterListener(this);
+        }
+
+        void OnDestroy()
+        {
+            onItemEquipped.UnregisterListener(this);
+            onItemUsed.UnregisterListener(this);
+        }
+        
+        public void OnEventRaised(ScriptableObject source)
+        {
+            if (null != _currentEquippedItem)
+            {
+                _currentEquippedItem.OnItemUnequipped();
+                _currentEquippedItem = null;
+            }
+            
+            if(null == source || 
+               source is not Item_SO itemData)
+                return;
+
+            EquipItem(itemData);
+        }
+
+        void EquipItem(Item_SO itemData)
+        {
+            _currentEquippedItem = equipItemsList[itemData.itemID];
+            _currentEquippedItem.OnItemEquipped(itemData);
+        }
+    }
+}

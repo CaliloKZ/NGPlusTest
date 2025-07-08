@@ -1,15 +1,13 @@
 using System;
-using System.Collections.Generic;
 using Grid;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Inventory
 {
     [Serializable]
-    public class Inventory
+    public class InventoryClass
     {
-        public event Action<InventorySlot> OnSlotChanged;
+        public event Action<InventorySlot> OnSlotSetup;
         public UIGrid<InventorySlot> GetGrid() { return _inventoryGrid; }
         UIGrid<InventorySlot> _inventoryGrid;
         int _width;
@@ -34,6 +32,7 @@ namespace Inventory
             InventorySlot slot = new InventorySlot();
             slot.SetSlotIndex(_slotCreationIndex);
             _slotCreationIndex++;
+            OnSlotSetup?.Invoke(slot);
             return slot;
         }
 
@@ -44,9 +43,9 @@ namespace Inventory
             int height = _height;
             int remaining = amount;
             
-            for (int x = 0; x < width && remaining > 0; x++)
+            for (int y = 0; y < height && remaining > 0; y++)
             {
-                for (int y = 0; y < height && remaining > 0; y++)
+                for (int x = 0; x < width && remaining > 0; x++)
                 {
                     InventorySlot slot = _inventoryGrid.GetValue(x, y);
                     if (slot.TryGetItemData(out _))
@@ -55,7 +54,6 @@ namespace Inventory
                             continue;
                         
                         remaining -= slot.StackItem(item, remaining);
-                        OnSlotChanged?.Invoke(slot);
                     }
                     else if (null == firstEmptySlot)
                     {
@@ -68,7 +66,6 @@ namespace Inventory
             {
                 int addAmount = Mathf.Min(item.maxStackSize, remaining);
                 firstEmptySlot.SetItem(item, addAmount);
-                OnSlotChanged?.Invoke(firstEmptySlot);
                 remaining -= addAmount;
             }
 
@@ -79,7 +76,32 @@ namespace Inventory
         public void DropItem(InventorySlot slot)
         {
             slot.ClearSlot();
-            OnSlotChanged?.Invoke(slot);
+        }
+
+        public void SetSelectedSlot(InventorySlot selectedSlot)
+        {
+            int width = _width;
+            int height = _height;
+            
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    InventorySlot slot = _inventoryGrid.GetValue(x, y);
+                    slot.SetSelected(slot == selectedSlot);
+                }
+            }
+        }
+        
+        public void SwapSlots(InventorySlot slotA, InventorySlot slotB)
+        {
+            Item_SO tempItem = slotA.ItemData;
+            int tempStack = slotA.StackSize;
+
+            slotA.SetItem(slotB.ItemData, slotB.StackSize);
+            slotB.SetItem(tempItem, tempStack);
+
+            SetSelectedSlot(slotB);
         }
     }
 }

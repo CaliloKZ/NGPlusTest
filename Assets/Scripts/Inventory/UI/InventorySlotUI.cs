@@ -1,41 +1,26 @@
-using System;
+using GameEvents;
 using Pool;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.Interactions;
-using UnityEngine.UI;
 
-namespace Inventory
-{ public class InventorySlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
-    { 
-        [SerializeField] ItemAmountTextUI itemAmountTextUI;
-        
-        [SerializeField] Image itemIconImage;
-        [SerializeField] Image itemSelectedBorder;
+namespace Inventory.UI
+{ public class InventorySlotUI : SlotUI, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
+    {
+        const string ITEM_DRAG_HANDLER_ID = "ItemDragHandler";
+        [SerializeField] GameEvent<InventorySlot, GameObject> onEndItemDrag;
         
         ItemDragHandler _dragHandler;
-
-        public void UpdateSlot(InventorySlot slot)
-        {
-            if (slot.TryGetItemData(out Item_SO itemData))
-            {
-                itemIconImage.sprite = itemData.itemIcon;
-                itemIconImage.gameObject.SetActive(true);
-                itemAmountTextUI.SetItemAmount(slot.StackSize, !slot.CanStack(itemData.itemID));
-                ToggleItemSelectedBorder(slot.IsSelected);
-                return;
-            }
-            
-            itemIconImage.gameObject.SetActive(false);
-            itemAmountTextUI.SetItemAmount(0);
-            ToggleItemSelectedBorder(false);
-        }
-        
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if(!Slot.TryGetItemData(out _))
+                return;
+
+            if (null == _dragHandler)
+                _dragHandler = FastPool.Instantiate<ItemDragHandler>(ITEM_DRAG_HANDLER_ID, eventData.position, Quaternion.identity, transform.parent.parent);
             
+            _dragHandler.UpdateItemIcon(Slot.ItemData.itemIcon);
         }
-        
+
         public void OnDrag(PointerEventData eventData)
         {
             if(null == _dragHandler)
@@ -43,24 +28,24 @@ namespace Inventory
         
             _dragHandler.transform.position = eventData.position;
         }
-        
+
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (null == eventData.pointerEnter || 
+                null == _dragHandler)
+                return;
+            
+            FastPool.Destroy(_dragHandler);
+            _dragHandler = null;
+            onEndItemDrag.Raise(Slot, eventData.pointerEnter);
         }
         
         public void OnPointerDown(PointerEventData eventData)
         {
-        }
-        
-        public void ToggleItemSelectedBorder(bool isSelected)
-        {
-            if (itemSelectedBorder != null)
-                itemSelectedBorder.enabled = isSelected;
-        }
-        
-        public void OnItemUsed()
-        {
-
+            if(!Slot.TryGetItemData(out _))
+                return;
+            
+            onSlotSelected.Raise(Slot);
         }
     }
 }

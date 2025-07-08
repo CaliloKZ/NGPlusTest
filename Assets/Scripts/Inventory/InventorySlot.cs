@@ -1,13 +1,14 @@
+using System;
 using UnityEngine;
 
 namespace Inventory
 {
     public class InventorySlot
     {
+        public event Action OnSlotChanged;
         public Item_SO ItemData { get; private set; } 
         public int StackSize { get; private set; } 
         public int SlotIndex { get; private set; }
-        
         public bool IsSelected { get; private set; }
 
         public bool CanStack(int itemID)
@@ -22,12 +23,15 @@ namespace Inventory
         {
             ItemData = null;
             StackSize = 0;
+            IsSelected = false;
+            OnSlotChanged?.Invoke();
         }
     
         public void SetItem(Item_SO newItem, int newAmount = 1)
         {
             ItemData = newItem;
             StackSize = newAmount;
+            OnSlotChanged?.Invoke();
         }
     
         public bool TryGetItemData(out Item_SO itemDataAsset)
@@ -44,6 +48,7 @@ namespace Inventory
             int spaceLeft = ItemData.maxStackSize - StackSize;
             int amountToAdd = Mathf.Min(spaceLeft, amount);
             StackSize += amountToAdd;
+            OnSlotChanged?.Invoke();
             return amountToAdd;
         }
 
@@ -51,5 +56,12 @@ namespace Inventory
         {
             SlotIndex = slotIndex;
         }
+
+        public void SetSelected(bool isSelected)
+        {
+            IsSelected = isSelected;
+            OnSlotChanged?.Invoke();
+        }
+        
     }
 }
