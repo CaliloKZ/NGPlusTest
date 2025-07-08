@@ -4450,6 +4450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2780772c334e09346ab31b2ce1b37802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventorySystem: {fileID: 0}
+  _saveLocation: 
 --- !u!1 &830149463
 GameObject:
   m_ObjectHideFlags: 0
@@ -29236,7 +29238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 0}
-  onItemUsed: {fileID: 11400000, guid: 5b407e630fea50a4988745bc8d7af658, type: 2}
+  onItemUsed: {fileID: 0}
   itemRenderer: {fileID: 669754877}
 --- !u!1 &1698609870
 GameObject:
