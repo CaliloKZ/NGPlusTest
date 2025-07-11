@@ -13,6 +13,10 @@ namespace Inventory.UI
         [SerializeField] Image equippedItemImage;
 
 
+        public void ClearSelectedItem()
+        {
+            equippedItemImage.enabled = false;
+        }
         public void ItemSelected(Item_SO itemData)
         {
             equippedItemImage.sprite = itemData.itemIcon;

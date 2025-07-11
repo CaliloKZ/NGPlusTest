@@ -7,10 +7,11 @@ using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class PlayerEquipmentController : MonoBehaviour, IGameEventListener<ScriptableObject>
+    public class PlayerEquipmentController : MonoBehaviour, IGameEventListener<ScriptableObject>, IGameEventListener<InventorySlot>
     {
         [SerializeField] GameEvent<ScriptableObject> onItemEquipped;
         [SerializeField] GameEvent<ScriptableObject> onItemUsed;
+        [SerializeField] GameEvent<InventorySlot> onItemDropped;
         [SerializeField] InputActionReference fireActionReference;
         [SerializeField] List<EquipItems> equipItemsList = new();
         
@@ -20,12 +21,14 @@ namespace Player
         {
             onItemEquipped.RegisterListener(this);
             onItemUsed.RegisterListener(this);
+            onItemDropped.RegisterListener(this);
         }
 
         void OnDestroy()
         {
             onItemEquipped.UnregisterListener(this);
             onItemUsed.UnregisterListener(this);
+            onItemDropped.UnregisterListener(this);
         }
         
         public void OnEventRaised(ScriptableObject source)
@@ -41,6 +44,15 @@ namespace Player
                 return;
 
             EquipItem(itemData);
+        }
+
+        public void OnEventRaised(InventorySlot slot)
+        {
+            if(null == _currentEquippedItem || slot.ItemData != _currentEquippedItem.ItemData)
+                return;
+            
+            _currentEquippedItem.OnItemUnequipped();
+            _currentEquippedItem = null;
         }
 
         void EquipItem(Item_SO itemData)

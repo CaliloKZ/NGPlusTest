@@ -21,13 +21,12 @@ namespace Inventory
         [SerializeField] GameEvent<InventorySlot> onItemDroppedEvent;
         [SerializeField] GameEvent<InventorySlot> onSlotSelectedEvent;
         [SerializeField] GameEvent<InventorySlot, GameObject> onSlotSwapEvent;
-        
+        InventorySlot _selectedSlot;
         readonly InventoryClass _inventoryClass = new();
 
         void Awake()
         {
             itemCollectEvent.RegisterListener(this);
-            onItemDroppedEvent.RegisterListener(this);
             onSlotSelectedEvent.RegisterListener(this);
             onSlotSwapEvent.RegisterListener(this);
             
@@ -39,7 +38,6 @@ namespace Inventory
         private void OnDestroy()
         {
             itemCollectEvent.UnregisterListener(this);
-            onItemDroppedEvent.UnregisterListener(this);
             onSlotSelectedEvent.UnregisterListener(this);
             onSlotSwapEvent.UnregisterListener(this);
             
@@ -65,9 +63,13 @@ namespace Inventory
 
         public void OnEventRaised(InventorySlot slot)
         {
+            if (!slot.TryGetItemData(out Item_SO itemData))
+                return;
+            
+            _selectedSlot = slot;
             _inventoryClass.SetSelectedSlot(slot);
-            inventoryUI.ItemSelected(slot.ItemData);
-            onItemEquipped.Raise(slot.ItemData);
+            inventoryUI.ItemSelected(itemData);
+            onItemEquipped.Raise(itemData);
         }
         
         public void OnEventRaised(InventorySlot slot, GameObject pointerEnter)
@@ -101,6 +103,9 @@ namespace Inventory
 
         void OnItemDrop(InventorySlot slot)
         {
+            if(slot == _selectedSlot)
+                inventoryUI.ClearSelectedItem();
+            
             onItemDroppedEvent.Raise(slot);
             _inventoryClass.DropItem(slot);
             SaveInventory();
