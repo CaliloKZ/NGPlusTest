@@ -29225,7 +29225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 0}
-  onItemUsed: {fileID: 0}
+  onItemUsed: {fileID: 11400000, guid: 5b407e630fea50a4988745bc8d7af658, type: 2}
   itemRenderer: {fileID: 669754877}
 --- !u!1 &1698609870
 GameObject:

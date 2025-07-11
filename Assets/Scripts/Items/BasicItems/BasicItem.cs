@@ -9,6 +9,7 @@ namespace Items.BasicItems
         public override void OnItemEquipped(Item_SO itemData)
         {
             base.OnItemEquipped(itemData);
+            ItemData = itemData;
             itemRenderer.sprite = itemData.itemIcon;
         }
     }
