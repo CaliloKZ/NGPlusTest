@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Grid;
+using SaveSystemCore.SaveData;
 using UnityEngine;
 
 namespace Inventory
@@ -102,6 +104,39 @@ namespace Inventory
             slotB.SetItem(tempItem, tempStack);
 
             SetSelectedSlot(slotB);
+        }
+
+        public InventorySlot[] GetAllSlots()
+        {
+            List<InventorySlot> slotList = new();
+            for (int y = 0; y < _height; y++)
+            {
+                for (int x = 0; x < _width; x++)
+                {
+                    slotList.Add(_inventoryGrid.GetValue(x, y));
+                }
+            }
+            
+            return slotList.ToArray();
+        }
+
+        public void LoadSlots(InventorySaveData saveData, ref List<ScriptableObject> itemDatas)
+        {
+            InventorySlot[] slotArray = GetAllSlots();
+            int maxSlots = Mathf.Min(slotArray.Length, saveData.slots.Count);
+            
+            for (int i = 0; i < maxSlots; i++)
+            {
+                SlotSaveData slotData = saveData.slots[i];
+
+                if (slotData.ItemID < 0 || slotData.ItemID >= itemDatas.Count)
+                    continue;
+
+                if (itemDatas[slotData.ItemID] is not Item_SO itemData)
+                    continue;
+
+                slotArray[i].SetItem(itemData, slotData.StackSize);
+            }
         }
     }
 }
